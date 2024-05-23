@@ -6,7 +6,9 @@
 //
 
 protocol NetworkRepositoryable {
-    
+    func getMovieList(keyword: String,
+                      searchType: MovieListGET.MovieSearchType,
+                      page: Int) async throws -> MovieListDTO
 }
 
 struct NetworkRepository: NetworkRepositoryable {
@@ -14,5 +16,17 @@ struct NetworkRepository: NetworkRepositoryable {
     
     init(networkManager: NetworkManageralbe) {
         self.networkManager = networkManager
+    }
+    
+    func getMovieList(keyword: String,
+                      searchType: MovieListGET.MovieSearchType,
+                      page: Int) async throws -> MovieListDTO {
+        let requestable = MovieListGET(
+            keyword: keyword,
+            searchType: searchType,
+            page: page
+        )
+        
+        return try await networkManager.request(requestable, resultType: MovieListDTO.self)
     }
 }
