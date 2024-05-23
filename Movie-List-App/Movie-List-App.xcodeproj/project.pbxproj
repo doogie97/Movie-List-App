@@ -76,6 +76,7 @@
 			children = (
 				C6F3AC9A2BFF6BE800A108D9 /* Application */,
 				C6F3ACC32BFF6F2200A108D9 /* Data */,
+				C6F3ACCF2BFF747F00A108D9 /* Domain */,
 				C6F3AC9B2BFF6BF900A108D9 /* Presentation */,
 				C6F3AC9C2BFF6C0300A108D9 /* Resource */,
 				C6F3AC942BFF684100A108D9 /* Info.plist */,
@@ -126,6 +127,13 @@
 				C6F3ACC92BFF713000A108D9 /* APIError.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		C6F3ACCF2BFF747F00A108D9 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
