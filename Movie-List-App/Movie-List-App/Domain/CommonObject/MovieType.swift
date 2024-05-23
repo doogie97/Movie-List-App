@@ -9,4 +9,5 @@ enum MovieType: String {
     case movie
     case series
     case episode
+    case all
 }

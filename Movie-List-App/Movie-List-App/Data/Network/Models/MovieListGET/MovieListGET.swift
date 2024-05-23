@@ -27,12 +27,17 @@ struct MovieListGET: Requestable {
     var path = ""
     let headers = [String : String]()
     var params: [String : Any] {
-        return [
+        var params: [String : Any] = [
             "apikey" : apiKey,
             "s" : keyword,
-            "type" : searchType.rawValue,
             "page" : page
         ]
+        
+        if searchType != .all {
+            params["type"] = searchType.rawValue
+        }
+        
+        return params
     }
     var httpMethod = HTTPMethod.get
     var encodingType = EncodingType.urlEncoding
