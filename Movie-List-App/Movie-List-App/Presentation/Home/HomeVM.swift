@@ -31,16 +31,14 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .movie)
                 try await requestList(searchType: .series)
                 try await requestList(searchType: .episode)
-                print(self.movieSectionList)
+                await MainActor.run {
+                    if movieSectionList.isEmpty {
+                        print("검색 결과가 없습니다.")
+                    }
+                }
             } catch let error {
                 await MainActor.run {
                     print(error.errorMessage)
-                }
-            }
-            
-            if movieSectionList.isEmpty {
-                await MainActor.run {
-                    print("검색 결과가 없습니다.")
                 }
             }
         }
