@@ -33,6 +33,17 @@ extension Requestable {
     }
 }
 
+enum BaseURLCase {
+    case movieAPI
+    
+    var url: String {
+        switch self {
+        case .movieAPI:
+            return "http://www.omdbapi.com"
+        }
+    }
+}
+
 enum EncodingType {
     case jsonEncoding
     case urlEncoding
