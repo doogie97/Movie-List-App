@@ -27,6 +27,7 @@ final class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.getMovieList(keyword: "star")
     }
 }
 

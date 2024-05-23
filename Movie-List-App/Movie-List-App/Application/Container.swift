@@ -15,7 +15,9 @@ final class Container: Containerable {
     private let networkRepository = NetworkRepository(networkManager: NetworkManager())
     
     func homeVC() -> HomeVC {
-        let viewModel = HomeVM()
+        let viewModel = HomeVM(
+            getMovieListUseCase: GetMovieListUseCase(networkRepository: networkRepository)
+        )
         
         return HomeVC(viewModel: viewModel)
     }
