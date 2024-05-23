@@ -19,6 +19,8 @@ struct NetworkManager: NetworkManageralbe {
         switch response.error {
         case .sessionTaskFailed(_):
             throw APIError.timeOut
+        case .responseSerializationFailed(_):
+            throw APIError.decodingError
         default:
             break
         }
