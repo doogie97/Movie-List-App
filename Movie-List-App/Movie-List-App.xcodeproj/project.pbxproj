@@ -29,6 +29,7 @@
 		C6F3ACE32BFF790100A108D9 /* MovieListGET.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACE22BFF790100A108D9 /* MovieListGET.swift */; };
 		C6F3ACE52BFF7DCA00A108D9 /* MovieListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACE42BFF7DCA00A108D9 /* MovieListDTO.swift */; };
 		C6F3ACE92BFF813000A108D9 /* MovieType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACE82BFF813000A108D9 /* MovieType.swift */; };
+		C6F3ACEB2BFF818700A108D9 /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACEA2BFF818700A108D9 /* MovieList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		C6F3ACE22BFF790100A108D9 /* MovieListGET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListGET.swift; sourceTree = "<group>"; };
 		C6F3ACE42BFF7DCA00A108D9 /* MovieListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDTO.swift; sourceTree = "<group>"; };
 		C6F3ACE82BFF813000A108D9 /* MovieType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieType.swift; sourceTree = "<group>"; };
+		C6F3ACEA2BFF818700A108D9 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 		C6F3ACE62BFF7FD400A108D9 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				C6F3ACEA2BFF818700A108D9 /* MovieList.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				C6F3ACCE2BFF744000A108D9 /* NetworkRepository.swift in Sources */,
 				C6F3ACE32BFF790100A108D9 /* MovieListGET.swift in Sources */,
 				C6F3ACDD2BFF776C00A108D9 /* HomeVM.swift in Sources */,
+				C6F3ACEB2BFF818700A108D9 /* MovieList.swift in Sources */,
 				C6F3ACCC2BFF72B000A108D9 /* NetworkManager.swift in Sources */,
 				C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */,
 				C6F3ACC62BFF6FB600A108D9 /* Requestable.swift in Sources */,
