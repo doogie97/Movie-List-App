@@ -39,7 +39,7 @@ enum BaseURLCase {
     var url: String {
         switch self {
         case .movieAPI:
-            return "http://www.omdbapi.com"
+            return "https://www.omdbapi.com"
         }
     }
 }
