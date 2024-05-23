@@ -22,6 +22,7 @@
 		C6F3ACCA2BFF713000A108D9 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACC92BFF713000A108D9 /* APIError.swift */; };
 		C6F3ACCC2BFF72B000A108D9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACCB2BFF72B000A108D9 /* NetworkManager.swift */; };
 		C6F3ACCE2BFF744000A108D9 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACCD2BFF744000A108D9 /* NetworkRepository.swift */; };
+		C6F3ACD72BFF763900A108D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACD62BFF763900A108D9 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		C6F3ACC92BFF713000A108D9 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		C6F3ACCB2BFF72B000A108D9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C6F3ACCD2BFF744000A108D9 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
+		C6F3ACD62BFF763900A108D9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F3AC8A2BFF684000A108D9 /* HomeVC.swift */,
+				C6F3ACD62BFF763900A108D9 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */,
 				C6F3ACC62BFF6FB600A108D9 /* Requestable.swift in Sources */,
 				C6F3AC872BFF684000A108D9 /* AppDelegate.swift in Sources */,
+				C6F3ACD72BFF763900A108D9 /* HomeView.swift in Sources */,
 				C6F3ACCA2BFF713000A108D9 /* APIError.swift in Sources */,
 				C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */,
 			);

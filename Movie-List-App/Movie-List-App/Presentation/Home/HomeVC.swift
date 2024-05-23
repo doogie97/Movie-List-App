@@ -7,11 +7,16 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
-
+final class HomeVC: UIViewController {
+    private let homeView = HomeView()
+    
+    override func loadView() {
+        super.loadView()
+        self.view = homeView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemPurple
     }
 }
 
