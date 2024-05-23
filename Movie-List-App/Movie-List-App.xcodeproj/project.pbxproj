@@ -23,6 +23,7 @@
 		C6F3ACCC2BFF72B000A108D9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACCB2BFF72B000A108D9 /* NetworkManager.swift */; };
 		C6F3ACCE2BFF744000A108D9 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACCD2BFF744000A108D9 /* NetworkRepository.swift */; };
 		C6F3ACD72BFF763900A108D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACD62BFF763900A108D9 /* HomeView.swift */; };
+		C6F3ACDB2BFF76D000A108D9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		C6F3ACCB2BFF72B000A108D9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C6F3ACCD2BFF744000A108D9 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		C6F3ACD62BFF763900A108D9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				C6F3AC9B2BFF6BF900A108D9 /* Presentation */,
 				C6F3AC9C2BFF6C0300A108D9 /* Resource */,
 				C6F3AC942BFF684100A108D9 /* Info.plist */,
+				C6F3ACD82BFF76AA00A108D9 /* Utills */,
 			);
 			path = "Movie-List-App";
 			sourceTree = "<group>";
@@ -145,6 +148,22 @@
 				C6F3ACD62BFF763900A108D9 /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		C6F3ACD82BFF76AA00A108D9 /* Utills */ = {
+			isa = PBXGroup;
+			children = (
+				C6F3ACD92BFF76C400A108D9 /* Helper */,
+			);
+			path = Utills;
+			sourceTree = "<group>";
+		};
+		C6F3ACD92BFF76C400A108D9 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +258,7 @@
 				C6F3ACD72BFF763900A108D9 /* HomeView.swift in Sources */,
 				C6F3ACCA2BFF713000A108D9 /* APIError.swift in Sources */,
 				C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */,
+				C6F3ACDB2BFF76D000A108D9 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
