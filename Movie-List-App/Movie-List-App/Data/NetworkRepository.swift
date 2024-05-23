@@ -7,7 +7,7 @@
 
 protocol NetworkRepositoryable {
     func getMovieList(keyword: String,
-                      searchType: MovieListGET.MovieSearchType,
+                      searchType: MovieType,
                       page: Int) async throws -> MovieListDTO
 }
 
@@ -19,7 +19,7 @@ struct NetworkRepository: NetworkRepositoryable {
     }
     
     func getMovieList(keyword: String,
-                      searchType: MovieListGET.MovieSearchType,
+                      searchType: MovieType,
                       page: Int) async throws -> MovieListDTO {
         let requestable = MovieListGET(
             keyword: keyword,

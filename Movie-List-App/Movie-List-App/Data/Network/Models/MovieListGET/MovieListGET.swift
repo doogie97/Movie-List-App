@@ -9,12 +9,12 @@ import Alamofire
 
 struct MovieListGET: Requestable {
     let keyword: String
-    let searchType: MovieSearchType
+    let searchType: MovieType
     let page: Int
     let apiKey: String
     
     init(keyword: String,
-         searchType: MovieSearchType,
+         searchType: MovieType,
          page: Int,
          apiKey: String = "aab90e3a") {
         self.keyword = keyword
@@ -36,10 +36,4 @@ struct MovieListGET: Requestable {
     }
     var httpMethod = HTTPMethod.get
     var encodingType = EncodingType.urlEncoding
-    
-    enum MovieSearchType: String {
-        case movie
-        case series
-        case episode
-    }
 }
