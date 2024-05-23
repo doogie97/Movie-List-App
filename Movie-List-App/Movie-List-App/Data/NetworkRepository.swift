@@ -27,6 +27,10 @@ struct NetworkRepository: NetworkRepositoryable {
             page: page
         )
         
-        return try await networkManager.request(requestable, resultType: MovieListDTO.self)
+        do {
+            return try await networkManager.request(requestable, resultType: MovieListDTO.self)
+        } catch let error {
+            throw error
+        }
     }
 }
