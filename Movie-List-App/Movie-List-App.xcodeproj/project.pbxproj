@@ -26,6 +26,7 @@
 		C6F3ACDB2BFF76D000A108D9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */; };
 		C6F3ACDD2BFF776C00A108D9 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACDC2BFF776C00A108D9 /* HomeVM.swift */; };
 		C6F3ACDF2BFF77DA00A108D9 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACDE2BFF77DA00A108D9 /* Container.swift */; };
+		C6F3ACE32BFF790100A108D9 /* MovieListGET.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACE22BFF790100A108D9 /* MovieListGET.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C6F3ACDC2BFF776C00A108D9 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		C6F3ACDE2BFF77DA00A108D9 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		C6F3ACE22BFF790100A108D9 /* MovieListGET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListGET.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +88,9 @@
 				C6F3ACC32BFF6F2200A108D9 /* Data */,
 				C6F3ACCF2BFF747F00A108D9 /* Domain */,
 				C6F3AC9B2BFF6BF900A108D9 /* Presentation */,
+				C6F3ACD82BFF76AA00A108D9 /* Utills */,
 				C6F3AC9C2BFF6C0300A108D9 /* Resource */,
 				C6F3AC942BFF684100A108D9 /* Info.plist */,
-				C6F3ACD82BFF76AA00A108D9 /* Utills */,
 			);
 			path = "Movie-List-App";
 			sourceTree = "<group>";
@@ -134,6 +136,7 @@
 			children = (
 				C6F3ACCB2BFF72B000A108D9 /* NetworkManager.swift */,
 				C6F3ACC52BFF6FB600A108D9 /* Requestable.swift */,
+				C6F3ACE02BFF78C800A108D9 /* Models */,
 				C6F3ACC92BFF713000A108D9 /* APIError.swift */,
 			);
 			path = Network;
@@ -170,6 +173,22 @@
 				C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		C6F3ACE02BFF78C800A108D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C6F3ACE12BFF78F400A108D9 /* MovieListGET */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C6F3ACE12BFF78F400A108D9 /* MovieListGET */ = {
+			isa = PBXGroup;
+			children = (
+				C6F3ACE22BFF790100A108D9 /* MovieListGET.swift */,
+			);
+			path = MovieListGET;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6F3ACCE2BFF744000A108D9 /* NetworkRepository.swift in Sources */,
+				C6F3ACE32BFF790100A108D9 /* MovieListGET.swift in Sources */,
 				C6F3ACDD2BFF776C00A108D9 /* HomeVM.swift in Sources */,
 				C6F3ACCC2BFF72B000A108D9 /* NetworkManager.swift in Sources */,
 				C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */,
