@@ -54,14 +54,38 @@
 		C6F3AC852BFF684000A108D9 /* Movie-List-App */ = {
 			isa = PBXGroup;
 			children = (
-				C6F3AC862BFF684000A108D9 /* AppDelegate.swift */,
-				C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */,
-				C6F3AC8A2BFF684000A108D9 /* ViewController.swift */,
-				C6F3AC8F2BFF684100A108D9 /* Assets.xcassets */,
-				C6F3AC912BFF684100A108D9 /* LaunchScreen.storyboard */,
+				C6F3AC9A2BFF6BE800A108D9 /* Application */,
+				C6F3AC9B2BFF6BF900A108D9 /* Presentation */,
+				C6F3AC9C2BFF6C0300A108D9 /* Resource */,
 				C6F3AC942BFF684100A108D9 /* Info.plist */,
 			);
 			path = "Movie-List-App";
+			sourceTree = "<group>";
+		};
+		C6F3AC9A2BFF6BE800A108D9 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C6F3AC862BFF684000A108D9 /* AppDelegate.swift */,
+				C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		C6F3AC9B2BFF6BF900A108D9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6F3AC912BFF684100A108D9 /* LaunchScreen.storyboard */,
+				C6F3AC8A2BFF684000A108D9 /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C6F3AC9C2BFF6C0300A108D9 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C6F3AC8F2BFF684100A108D9 /* Assets.xcassets */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
