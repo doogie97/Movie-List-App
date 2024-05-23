@@ -12,11 +12,11 @@ struct GetMovieListUseCase {
         self.networkRepository = networkRepository
     }
     
-    func execute(keywork: String,
+    func execute(keyword: String,
                  searchType: MovieType,
                  page: Int) async throws -> MovieList {
         do {
-            let response = try await networkRepository.getMovieList(keyword: keywork,
+            let response = try await networkRepository.getMovieList(keyword: keyword,
                                                                     searchType: searchType,
                                                                     page: page)
             return MovieList(
