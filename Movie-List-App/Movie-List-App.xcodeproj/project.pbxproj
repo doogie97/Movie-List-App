@@ -24,6 +24,7 @@
 		C6F3ACCE2BFF744000A108D9 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACCD2BFF744000A108D9 /* NetworkRepository.swift */; };
 		C6F3ACD72BFF763900A108D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACD62BFF763900A108D9 /* HomeView.swift */; };
 		C6F3ACDB2BFF76D000A108D9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */; };
+		C6F3ACDD2BFF776C00A108D9 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3ACDC2BFF776C00A108D9 /* HomeVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		C6F3ACCD2BFF744000A108D9 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		C6F3ACD62BFF763900A108D9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		C6F3ACDC2BFF776C00A108D9 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			children = (
 				C6F3AC8A2BFF684000A108D9 /* HomeVC.swift */,
 				C6F3ACD62BFF763900A108D9 /* HomeView.swift */,
+				C6F3ACDC2BFF776C00A108D9 /* HomeVM.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6F3ACCE2BFF744000A108D9 /* NetworkRepository.swift in Sources */,
+				C6F3ACDD2BFF776C00A108D9 /* HomeVM.swift in Sources */,
 				C6F3ACCC2BFF72B000A108D9 /* NetworkManager.swift in Sources */,
 				C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */,
 				C6F3ACC62BFF6FB600A108D9 /* Requestable.swift in Sources */,
