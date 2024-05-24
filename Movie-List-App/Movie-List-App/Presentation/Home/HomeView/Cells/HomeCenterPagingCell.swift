@@ -18,9 +18,9 @@ final class HomeCenterPagingCell: UICollectionViewCell {
     private lazy var gradientView = UIView()
     private lazy var gradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 0,
+        gradient.frame = CGRect(x: 8,
                                 y: 0,
-                                width: self.frame.width,
+                                width: self.frame.width - 16,
                                 height: self.frame.height / 2)
         let colors: [CGColor] = [
             .init(red: 0, green: 0, blue: 0, alpha: 0),
@@ -42,14 +42,14 @@ final class HomeCenterPagingCell: UICollectionViewCell {
     }()
     
     private lazy var rakingLabel = {
-        let label = pretendardLabel(family: .Black, size: 90, textAlignment: .center)
+        let label = pretendardLabel(family: .Black, size: 90, color: .white, textAlignment: .center)
         label.layer.opacity = 0.7
         
         return label
     }()
     
     private lazy var titleLabel = {
-        let label = pretendardLabel(family: .SemiBold, size: 25, lineCount: 2)
+        let label = pretendardLabel(family: .SemiBold, size: 25, color: .white, lineCount: 2)
         label.layer.opacity = 0.7
         
         return label
