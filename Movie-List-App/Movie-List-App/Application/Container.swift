@@ -21,7 +21,10 @@ final class Container: Containerable {
             getMovieListUseCase: GetMovieListUseCase(networkRepository: networkRepository)
         )
         
-        return HomeVC(viewModel: viewModel)
+        return HomeVC(viewModel: viewModel, 
+                      container: self)
+    }
+    
     func movieListVC(keyword: String,
                      searchType: MovieType) -> MovieListVC {
         let viewModel = MovieListVM(keyword: keyword,

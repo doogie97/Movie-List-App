@@ -20,6 +20,7 @@ protocol HomeVMOutput {
     var isLoading: PublishRelay<Bool> { get }
     var showAlert: PublishRelay<String> { get }
     var searchFinished: PublishRelay<Bool> { get }
+    var showMovieList: PublishRelay<(keyword: String, searchType: MovieType)> { get }
     var keyword: String { get }
     var movieSectionList: [MovieList] { get }
 }
@@ -70,7 +71,10 @@ final class HomeVM: HomeVMable {
     }
     
     func touchMoreButton(sectionIndex: Int) {
-        print("\(sectionIndex)번 섹션 전체보기")
+        guard let section = movieSectionList[safe: sectionIndex] else {
+            return
+        }
+        showMovieList.accept((keyword: self.keyword, searchType: section.movieType))
     }
     
     func touchMovieItem(indexPath: IndexPath) {
@@ -91,6 +95,7 @@ final class HomeVM: HomeVMable {
     let isLoading = PublishRelay<Bool>()
     let showAlert = PublishRelay<String>()
     let searchFinished = PublishRelay<Bool>()
+    let showMovieList = PublishRelay<(keyword: String, searchType: MovieType)>()
     var keyword = ""
     var movieSectionList = [MovieList]()
 }
