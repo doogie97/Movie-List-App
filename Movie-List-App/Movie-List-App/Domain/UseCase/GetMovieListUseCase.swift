@@ -16,8 +16,11 @@ struct GetMovieListUseCase {
                  searchType: MovieType,
                  page: Int) async throws -> MovieList {
         do {
+            //실시간 베스트 타입이라는 가상 타입 구현
+            let keyword = searchType == .realTimeBest ? "game" : keyword
+            let newSearchType: MovieType = searchType == .realTimeBest ? .all : searchType
             let response = try await networkRepository.getMovieList(keyword: keyword,
-                                                                    searchType: searchType,
+                                                                    searchType: newSearchType,
                                                                     page: page)
             return MovieList(
                 movieType: searchType,

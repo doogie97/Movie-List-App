@@ -24,12 +24,19 @@ final class HomeMovieListView: UIView {
     }
     
     private lazy var homeCollectionView = createSectionCollectionView()
+    private lazy var emptyView = SearchEmptyView()
+    
     private func setLayout() {
         self.addSubview(homeCollectionView)
+        self.addSubview(emptyView)
         
         homeCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
-            $0.left.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        emptyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }
@@ -38,8 +45,10 @@ final class HomeMovieListView: UIView {
 extension HomeMovieListView {
     private func bindViewModel() {
         viewModel?.searchFinished.withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.homeCollectionView.reloadData()
+            .subscribe(onNext: { owner, isEmptyResult in
+                owner.homeCollectionView = owner.createSectionCollectionView()
+                owner.setLayout()
+                owner.emptyView.isHidden = !isEmptyResult
             })
             .disposed(by: disposeBag)
     }
@@ -58,10 +67,15 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
                                 forCellWithReuseIdentifier: "\(HomeHorizontalCell.self)")
         collectionView.register(HomeVerticalCell.self,
                                 forCellWithReuseIdentifier: "\(HomeVerticalCell.self)")
+        collectionView.register(HomeCenterPagingCell.self,
+                                forCellWithReuseIdentifier: "\(HomeCenterPagingCell.self)")
         
         collectionView.register(HomeSectionHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: "\(HomeSectionHeader.self)")
+        collectionView.register(HomeCenterPagingHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "\(HomeCenterPagingHeader.self)")
         
         return collectionView
     }
@@ -76,6 +90,8 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             switch sectionCase {
             case .movie, .series, .episode:
                 return self?.horizontalSectionLayout()
+            case .realTimeBest:
+                return self?.centerPagingSectionLayout()
             case .all:
                 return self?.verticalSectionLayout()
             }
@@ -84,7 +100,7 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
     
     private func horizontalSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(120),
-                                              heightDimension: .absolute(180))
+                                              heightDimension: .absolute(190))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize,
@@ -104,9 +120,9 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
     
     private func verticalSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .absolute(150))
+                                              heightDimension: .absolute(80))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        item.contentInsets = .init(top: 8, leading: 4, bottom: 8, trailing: 4)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize,
                                                        subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
@@ -117,6 +133,30 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         section.boundarySupplementaryItems = [.init(layoutSize: sectionHeaderSize,
                                                     elementKind: UICollectionView.elementKindSectionHeader,
                                                     alignment: .topLeading)]
+        return section
+    }
+    
+    private func centerPagingSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
+                                              heightDimension: .fractionalWidth(1.22))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.contentInsets = .init(top: 4, leading: 0, bottom: 8, trailing: 0)
+        
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(80))
+        section.boundarySupplementaryItems = [.init(layoutSize: sectionHeaderSize,
+                                                    elementKind: UICollectionView.elementKindSectionHeader,
+                                                    alignment: .topLeading)]
+        
         return section
     }
 
@@ -140,6 +180,10 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             return horizontalCell(collectionView: collectionView,
                                   indexPath: indexPath,
                                   movie: movie)
+        case .realTimeBest:
+            return centerPagingCell(collectionView: collectionView,
+                                    indexPath: indexPath,
+                                    movie: movie)
         case .all:
             return verticalCell(collectionView: collectionView,
                                 indexPath: indexPath,
@@ -163,21 +207,38 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let section = viewModel?.movieSectionList[safe: indexPath.section],
-                  let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(HomeSectionHeader.self)", for: indexPath) as? HomeSectionHeader else {
-                return UICollectionReusableView()
-            }
-            
-            header.setViewContents(viewModel: viewModel,
-                                   searchType: section.movieType,
-                                   totalCount: section.totalCount,
-                                   sectionIndex: indexPath.section)
-            return header
-        } else {
+    private func centerPagingCell(collectionView: UICollectionView, indexPath: IndexPath, movie: MovieList.Movie) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(HomeCenterPagingCell.self)", for: indexPath) as? HomeCenterPagingCell else {
             return UICollectionViewCell()
         }
+        cell.setCellContents(movie: movie, 
+                             index: indexPath.row)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let section = viewModel?.movieSectionList[safe: indexPath.section] else {
+                return UICollectionReusableView()
+            }
+            switch section.movieType {
+            case .movie, .series, .episode, .all:
+                if let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(HomeSectionHeader.self)", for: indexPath) as? HomeSectionHeader {
+                    header.setViewContents(viewModel: viewModel,
+                                           searchType: section.movieType,
+                                           totalCount: section.totalCount,
+                                           sectionIndex: indexPath.section)
+                    return header
+                }
+            case .realTimeBest :
+                if let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(HomeCenterPagingHeader.self)", for: indexPath) as? HomeCenterPagingHeader {
+                    header.setViewContents(searchType: section.movieType)
+                    return header
+                }
+            }
+        }
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

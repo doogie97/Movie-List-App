@@ -82,7 +82,7 @@ final class HomeSectionHeader: UICollectionReusableView {
         countLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(titleLabel.snp.trailing).inset(-4)
-            $0.trailing.equalToSuperview().inset(4)
+            $0.trailing.equalTo(moreButtonView.snp.leading).inset(-4)
         }
         
         moreButtonView.snp.makeConstraints {
