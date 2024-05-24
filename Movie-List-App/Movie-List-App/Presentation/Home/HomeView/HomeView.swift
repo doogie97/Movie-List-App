@@ -123,14 +123,20 @@ final class HomeView: UIView {
     
     @objc private func touchCancelButton() {
         touchXbutton()
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.movieListView.layer.opacity = 1
+        }
         self.endEditing(true)
     }
+    
+    private lazy var movieListView = HomeMovieListView(viewModel: self.viewModel)
     
     private func setLayout() {
         self.backgroundColor = .systemBackground
         
         self.addSubview(searchField)
         self.addSubview(cancelButton)
+        self.addSubview(movieListView)
         self.addSubview(loadingView)
 
         searchField.snp.makeConstraints {
@@ -143,6 +149,11 @@ final class HomeView: UIView {
             $0.top.bottom.equalTo(searchField)
             $0.leading.equalTo(searchField.snp.trailing).inset(-4)
             $0.width.equalTo(50)
+        }
+        
+        movieListView.snp.makeConstraints {
+            $0.top.equalTo(searchField.snp.bottom).inset(-8)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
         loadingView.snp.makeConstraints {
@@ -169,7 +180,7 @@ extension HomeView: UITextFieldDelegate {
             }
             
             self?.cancelButton.layer.opacity = 1
-            print("최근 검색 기록 표시")
+            self?.movieListView.layer.opacity = 0
             self?.layoutIfNeeded()
         }
         xButtonView.isHidden = textField.text?.isEmpty == true
@@ -183,7 +194,6 @@ extension HomeView: UITextFieldDelegate {
             }
             
             self?.cancelButton.layer.opacity = 0
-            print("검색 결과 화면 보여주기")
             self?.layoutIfNeeded()
         }
         
@@ -192,6 +202,7 @@ extension HomeView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         viewModel?.getMovieList(keyword: textField.text ?? "")
+        endEditing(true)
         return true
     }
 }
