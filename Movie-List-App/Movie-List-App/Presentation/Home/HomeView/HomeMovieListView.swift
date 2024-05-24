@@ -179,4 +179,8 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             return UICollectionViewCell()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel?.touchMovieItem(indexPath: indexPath)
+    }
 }

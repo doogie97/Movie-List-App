@@ -13,6 +13,7 @@ protocol HomeVMable: HomeVMInput, HomeVMOutput, AnyObject {}
 protocol HomeVMInput {
     func getMovieList(keyword: String)
     func touchMoreButton(sectionIndex: Int)
+    func touchMovieItem(indexPath: IndexPath)
 }
 
 protocol HomeVMOutput {
@@ -83,6 +84,15 @@ final class HomeVM: HomeVMable {
     
     func touchMoreButton(sectionIndex: Int) {
         print("\(sectionIndex)번 섹션 전체보기")
+    }
+    
+    func touchMovieItem(indexPath: IndexPath) {
+        guard let movie = movieSectionList[safe: indexPath.section]?.movieList[safe: indexPath.row] else {
+            showAlert.accept("해당 영화 정보를 불러올 수 없습니다.")
+            return
+        }
+        
+        print(movie.title)
     }
     
     //MARK: - Output
