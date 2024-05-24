@@ -10,6 +10,12 @@ import Kingfisher
 
 extension UIImageView {
     func setImage(_ url: String) {
+        if url == "N/A" {
+            self.image = UIImage(systemName: "camera")
+            self.tintColor = .xButtonBG
+            self.contentMode = .scaleAspectFit
+            return
+        }
         self.kf.indicatorType = .activity
         self.kf.setImage(with: URL(string: url),
                          options: [.scaleFactor(UIScreen.main.scale),

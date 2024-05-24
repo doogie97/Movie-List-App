@@ -29,7 +29,7 @@ final class HomeMovieListView: UIView {
         
         homeCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
-            $0.left.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
