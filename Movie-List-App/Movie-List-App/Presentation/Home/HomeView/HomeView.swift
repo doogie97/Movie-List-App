@@ -13,11 +13,6 @@ final class HomeView: UIView {
     init(viewModel: HomeVMable?) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-        self.backgroundColor = .systemBackground
-        self.addSubview(loadingView)
-        loadingView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
         
         setLayout()
     }
@@ -129,9 +124,12 @@ final class HomeView: UIView {
     }
     
     private func setLayout() {
+        self.backgroundColor = .systemBackground
+        
         self.addSubview(searchField)
         self.addSubview(cancelButton)
-        
+        self.addSubview(loadingView)
+
         searchField.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).inset(16)
             $0.leading.trailing.equalToSuperview().inset(16)
@@ -142,6 +140,10 @@ final class HomeView: UIView {
             $0.top.bottom.equalTo(searchField)
             $0.leading.equalTo(searchField.snp.trailing).inset(-4)
             $0.width.equalTo(50)
+        }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }
