@@ -23,8 +23,14 @@ final class HomeMovieListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private lazy var homeCollectionView = createSectionCollectionView()
     private func setLayout() {
-        self.backgroundColor = .systemBlue
+        self.addSubview(homeCollectionView)
+        
+        homeCollectionView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(16)
+            $0.left.trailing.bottom.equalToSuperview()
+        }
     }
 }
 
@@ -33,7 +39,7 @@ extension HomeMovieListView {
     private func bindViewModel() {
         viewModel?.searchFinished.withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                print(owner.viewModel?.keyword)
+                owner.homeCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -64,16 +70,26 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             
             //임시로 nil return
             switch sectionCase {
-            case .movie:
-                return nil
-            case .series:
-                return nil
-            case .episode:
-                return nil
+            case .movie, .series, .episode:
+                return self?.horizontalSectionLayout()
             case .all:
                 return nil
             }
         }
+    }
+    
+    private func horizontalSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(120),
+                                              heightDimension: .absolute(180))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = .init(top: 0, leading: 4, bottom: 8, trailing: 4)
+        return section
     }
     
     //DataSource, Delegate
