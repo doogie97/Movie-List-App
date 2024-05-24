@@ -30,6 +30,11 @@ final class HomeVM: HomeVMable {
     
     //MARK: Input
     func getMovieList(keyword: String) {
+        if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
+            showAlert.accept("검색어를 입력해 주세요.")
+            return
+        }
+        
         isLoading.accept(true)
         self.keyword = keyword
         self.movieSectionList = []

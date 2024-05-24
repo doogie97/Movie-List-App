@@ -39,6 +39,9 @@ final class HomeView: UIView {
         textField.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16, height: 0.0))
         textField.returnKeyType = .search
         textField.delegate = self
+        textField.inputAccessoryView = nil
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
         
         return textField
     }()
@@ -56,7 +59,7 @@ final class HomeView: UIView {
 
 extension HomeView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(textField.text)
+        viewModel?.getMovieList(keyword: textField.text ?? "")
         return true
     }
 }
