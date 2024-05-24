@@ -58,7 +58,8 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
                                 forCellWithReuseIdentifier: "\(HomeHorizontalCell.self)")
         collectionView.register(HomeVerticalCell.self,
                                 forCellWithReuseIdentifier: "\(HomeVerticalCell.self)")
-        
+        collectionView.register(HomeCenterPagingCell.self,
+                                forCellWithReuseIdentifier: "\(HomeCenterPagingCell.self)")
         collectionView.register(HomeSectionHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: "\(HomeSectionHeader.self)")
@@ -76,7 +77,9 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             switch sectionCase {
             case .movie, .series, .episode:
                 return self?.horizontalSectionLayout()
-            case .realTimeBest, .all:
+            case .realTimeBest:
+                return self?.centerPagingSectionLayout()
+            case .all:
                 return self?.verticalSectionLayout()
             }
         }
@@ -119,6 +122,30 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
                                                     alignment: .topLeading)]
         return section
     }
+    
+    private func centerPagingSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalWidth(1.36))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
+                                              heightDimension: .fractionalWidth(1.43))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
+        
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+        section.boundarySupplementaryItems = [.init(layoutSize: sectionHeaderSize,
+                                                    elementKind: UICollectionView.elementKindSectionHeader,
+                                                    alignment: .topLeading)]
+        
+        return section
+    }
 
     
     //DataSource, Delegate
@@ -136,10 +163,14 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         }
         
         switch section.movieType {
-        case .movie, .series, .episode, .realTimeBest:
+        case .movie, .series, .episode:
             return horizontalCell(collectionView: collectionView,
                                   indexPath: indexPath,
                                   movie: movie)
+        case .realTimeBest:
+            return centerPagingCell(collectionView: collectionView,
+                                    indexPath: indexPath,
+                                    movie: movie)
         case .all:
             return verticalCell(collectionView: collectionView,
                                 indexPath: indexPath,
@@ -157,6 +188,14 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
     
     private func verticalCell(collectionView: UICollectionView, indexPath: IndexPath, movie: MovieList.Movie) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(HomeVerticalCell.self)", for: indexPath) as? HomeVerticalCell else {
+            return UICollectionViewCell()
+        }
+        cell.setCellContents(movie: movie)
+        return cell
+    }
+    
+    private func centerPagingCell(collectionView: UICollectionView, indexPath: IndexPath, movie: MovieList.Movie) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(HomeCenterPagingCell.self)", for: indexPath) as? HomeCenterPagingCell else {
             return UICollectionViewCell()
         }
         cell.setCellContents(movie: movie)
