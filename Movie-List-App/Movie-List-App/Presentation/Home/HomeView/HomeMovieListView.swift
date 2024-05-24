@@ -126,9 +126,9 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
     
     private func verticalSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .absolute(150))
+                                              heightDimension: .absolute(80))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        item.contentInsets = .init(top: 8, leading: 4, bottom: 8, trailing: 4)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize,
                                                        subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
