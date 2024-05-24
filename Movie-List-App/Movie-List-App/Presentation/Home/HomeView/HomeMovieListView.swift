@@ -202,7 +202,8 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(HomeCenterPagingCell.self)", for: indexPath) as? HomeCenterPagingCell else {
             return UICollectionViewCell()
         }
-        cell.setCellContents(movie: movie)
+        cell.setCellContents(movie: movie, 
+                             index: indexPath.row)
         return cell
     }
     

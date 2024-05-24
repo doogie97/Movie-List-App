@@ -41,17 +41,26 @@ final class HomeCenterPagingCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var titleLabel = pretendardLabel()
+    private lazy var rakingLabel = {
+        let label = pretendardLabel(family: .Black, size: 90, textAlignment: .center)
+        label.layer.opacity = 0.7
+        
+        return label
+    }()
     
-    func setCellContents(movie: MovieList.Movie) {
+    func setCellContents(movie: MovieList.Movie,
+                         index: Int) {
         posterImageView.setImage(movie.imageUrl)
-        titleLabel.text = movie.title
+        rakingLabel.text = movie.title
+        rakingLabel.text = (index + 1).description
+        
         setLayout()
     }
     
     private func setLayout() {
         self.contentView.addSubview(posterImageView)
         self.contentView.addSubview(gradientView)
+        self.contentView.addSubview(rakingLabel)
         
         posterImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -60,6 +69,10 @@ final class HomeCenterPagingCell: UICollectionViewCell {
         gradientView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalToSuperview().dividedBy(2)
+        }
+        
+        rakingLabel.snp.makeConstraints {
+            $0.leading.bottom.equalToSuperview().inset(16)
         }
     }
     
