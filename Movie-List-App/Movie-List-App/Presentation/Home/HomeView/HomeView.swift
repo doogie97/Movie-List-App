@@ -122,7 +122,7 @@ final class HomeView: UIView {
     }()
     
     @objc private func touchCancelButton() {
-        touchXbutton()
+        xButtonView.isHidden = true
         UIView.animate(withDuration: 0.2) { [weak self] in
             self?.movieListView.layer.opacity = 1
         }
@@ -170,7 +170,7 @@ extension HomeView {
             }
             .disposed(by: disposeBag)
         
-        viewModel?.movieSectionInfo.withUnretained(self)
+        viewModel?.searchFinished.withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.movieListView.layer.opacity = 1
             })

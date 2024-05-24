@@ -12,12 +12,16 @@ protocol HomeVMable: HomeVMInput, HomeVMOutput, AnyObject {}
 
 protocol HomeVMInput {
     func getMovieList(keyword: String)
+    func touchMoreButton(sectionIndex: Int)
+    func touchMovieItem(indexPath: IndexPath)
 }
 
 protocol HomeVMOutput {
     var isLoading: PublishRelay<Bool> { get }
     var showAlert: PublishRelay<String> { get }
-    var movieSectionInfo: PublishRelay<HomeVM.MovieSectionInfo> { get }
+    var searchFinished: PublishRelay<Void> { get }
+    var keyword: String { get }
+    var movieSectionList: [MovieList] { get }
 }
 
 final class HomeVM: HomeVMable {
@@ -26,8 +30,8 @@ final class HomeVM: HomeVMable {
         self.getMovieListUseCase = getMovieListUseCase
     }
     
-    private var keyword = ""
-    private var movieSectionList = [MovieList]()
+    var keyword = ""
+    var movieSectionList = [MovieList]()
     
     //MARK: Input
     func getMovieList(keyword: String) {
@@ -44,14 +48,12 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .movie)
                 try await requestList(searchType: .series)
                 try await requestList(searchType: .episode)
+                try await requestList(searchType: .all)
                 await MainActor.run {
                     if movieSectionList.isEmpty {
                         showAlert.accept("검색 결과가 없습니다.")
                     }
-                    movieSectionInfo.accept(MovieSectionInfo(
-                        searchKeyword: keyword,
-                        movieSectionList: self.movieSectionList
-                    ))
+                    searchFinished.accept(())
                     isLoading.accept(false)
                 }
             } catch let error {
@@ -66,8 +68,31 @@ final class HomeVM: HomeVMable {
     private func requestList(searchType: MovieType) async throws {
         let list = try await getMovieListUseCase.execute(keyword: keyword, searchType: searchType, page: 1)
         if list.totalCount != 0 {
-            movieSectionList.append(list)
+            if searchType == .all && list.movieList.count > 5 {
+                var movieList = list.movieList
+                movieList = Array(movieList.prefix(5))
+                movieSectionList.append(MovieList(
+                    movieType: .all,
+                    totalCount: list.totalCount,
+                    movieList: movieList
+                ))
+            } else {
+                movieSectionList.append(list)
+            }
         }
+    }
+    
+    func touchMoreButton(sectionIndex: Int) {
+        print("\(sectionIndex)번 섹션 전체보기")
+    }
+    
+    func touchMovieItem(indexPath: IndexPath) {
+        guard let movie = movieSectionList[safe: indexPath.section]?.movieList[safe: indexPath.row] else {
+            showAlert.accept("해당 영화 정보를 불러올 수 없습니다.")
+            return
+        }
+        
+        print(movie.title)
     }
     
     //MARK: - Output
@@ -78,5 +103,5 @@ final class HomeVM: HomeVMable {
     
     let isLoading = PublishRelay<Bool>()
     let showAlert = PublishRelay<String>()
-    let movieSectionInfo = PublishRelay<MovieSectionInfo>()
+    let searchFinished = PublishRelay<Void>()
 }
