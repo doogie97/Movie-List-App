@@ -24,13 +24,7 @@ final class HomeMovieListView: UIView {
     }
     
     private lazy var homeCollectionView = createSectionCollectionView()
-    private lazy var emptyView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        view.isHidden = true
-        
-        return view
-    }()
+    private lazy var emptyView = SearchEmptyView()
     
     private func setLayout() {
         self.addSubview(homeCollectionView)
