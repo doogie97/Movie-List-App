@@ -59,6 +59,10 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         collectionView.register(HomeVerticalCell.self,
                                 forCellWithReuseIdentifier: "\(HomeVerticalCell.self)")
         
+        collectionView.register(HomeSectionHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "\(HomeSectionHeader.self)")
+        
         return collectionView
     }
     
@@ -89,6 +93,12 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+        section.boundarySupplementaryItems = [.init(layoutSize: sectionHeaderSize,
+                                                    elementKind: UICollectionView.elementKindSectionHeader,
+                                                    alignment: .topLeading)]
+        
         return section
     }
     
@@ -102,6 +112,11 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         let section = NSCollectionLayoutSection(group: group)
         
         section.contentInsets = .init(top: 0, leading: 4, bottom: 4, trailing: 4)
+        
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+        section.boundarySupplementaryItems = [.init(layoutSize: sectionHeaderSize,
+                                                    elementKind: UICollectionView.elementKindSectionHeader,
+                                                    alignment: .topLeading)]
         return section
     }
 
@@ -146,5 +161,21 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         }
         cell.setCellContents(movie: movie)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let section = viewModel?.movieSectionList[safe: indexPath.section],
+                  let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(HomeSectionHeader.self)", for: indexPath) as? HomeSectionHeader else {
+                return UICollectionReusableView()
+            }
+            
+            header.setViewContents(viewModel: viewModel,
+                                   searchType: section.movieType,
+                                   totalCount: section.totalCount)
+            return header
+        } else {
+            return UICollectionViewCell()
+        }
     }
 }
