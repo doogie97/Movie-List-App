@@ -7,12 +7,15 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 final class HomeMovieListView: UIView {
     private weak var viewModel: HomeVMable?
+    private let disposeBag = DisposeBag()
     init(viewModel: HomeVMable?) {
         self.viewModel = viewModel
         super.init(frame: .zero)
+        bindViewModel()
         setLayout()
     }
     
@@ -22,5 +25,15 @@ final class HomeMovieListView: UIView {
     
     private func setLayout() {
         self.backgroundColor = .systemBlue
+    }
+}
+
+extension HomeMovieListView {
+    private func bindViewModel() {
+        viewModel?.movieSectionInfo.withUnretained(self)
+            .subscribe(onNext: { owner, info in
+                print(info.searchKeyword)
+            })
+            .disposed(by: disposeBag)
     }
 }

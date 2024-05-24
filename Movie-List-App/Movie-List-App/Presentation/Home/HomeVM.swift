@@ -17,6 +17,7 @@ protocol HomeVMInput {
 protocol HomeVMOutput {
     var isLoading: PublishRelay<Bool> { get }
     var showAlert: PublishRelay<String> { get }
+    var movieSectionInfo: PublishRelay<HomeVM.MovieSectionInfo> { get }
 }
 
 final class HomeVM: HomeVMable {
@@ -47,6 +48,10 @@ final class HomeVM: HomeVMable {
                     if movieSectionList.isEmpty {
                         showAlert.accept("검색 결과가 없습니다.")
                     }
+                    movieSectionInfo.accept(MovieSectionInfo(
+                        searchKeyword: keyword,
+                        movieSectionList: self.movieSectionList
+                    ))
                     isLoading.accept(false)
                 }
             } catch let error {
@@ -66,6 +71,12 @@ final class HomeVM: HomeVMable {
     }
     
     //MARK: - Output
+    struct MovieSectionInfo {
+        let searchKeyword: String
+        let movieSectionList: [MovieList]
+    }
+    
     let isLoading = PublishRelay<Bool>()
     let showAlert = PublishRelay<String>()
+    let movieSectionInfo = PublishRelay<MovieSectionInfo>()
 }

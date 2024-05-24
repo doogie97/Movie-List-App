@@ -169,6 +169,12 @@ extension HomeView {
                 owner.loadingView.isLoading(isLoading)
             }
             .disposed(by: disposeBag)
+        
+        viewModel?.movieSectionInfo.withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.movieListView.layer.opacity = 1
+            })
+            .disposed(by: disposeBag)
     }
 }
 
