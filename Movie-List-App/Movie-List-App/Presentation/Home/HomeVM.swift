@@ -30,9 +30,6 @@ final class HomeVM: HomeVMable {
         self.getMovieListUseCase = getMovieListUseCase
     }
     
-    var keyword = ""
-    var movieSectionList = [MovieList]()
-    
     //MARK: Input
     func getMovieList(keyword: String) {
         if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
@@ -105,4 +102,6 @@ final class HomeVM: HomeVMable {
     let isLoading = PublishRelay<Bool>()
     let showAlert = PublishRelay<String>()
     let searchFinished = PublishRelay<Void>()
+    var keyword = ""
+    var movieSectionList = [MovieList]()
 }
