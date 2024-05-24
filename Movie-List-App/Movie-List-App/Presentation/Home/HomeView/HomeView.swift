@@ -7,13 +7,16 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 final class HomeView: UIView {
     private weak var viewModel: HomeVMable?
+    private let disposeBag = DisposeBag()
+    
     init(viewModel: HomeVMable?) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-        
+        bindViewModel()
         setLayout()
     }
     
@@ -21,7 +24,7 @@ final class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private(set) lazy var loadingView = LoadingView()
+    private lazy var loadingView = LoadingView()
     
     private lazy var searchField: UITextField = {
         let textField = UITextField()
@@ -145,6 +148,16 @@ final class HomeView: UIView {
         loadingView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+}
+
+extension HomeView {
+    private func bindViewModel() {
+        viewModel?.isLoading.withUnretained(self)
+            .subscribe { owner, isLoading in
+                owner.loadingView.isLoading(isLoading)
+            }
+            .disposed(by: disposeBag)
     }
 }
 

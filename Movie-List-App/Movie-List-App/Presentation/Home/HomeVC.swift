@@ -35,12 +35,6 @@ final class HomeVC: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.isLoading.withUnretained(self)
-            .subscribe { owner, isLoading in
-                owner.homeView.loadingView.isLoading(isLoading)
-            }
-            .disposed(by: disposeBag)
-        
         viewModel.showAlert.withUnretained(self)
             .subscribe { owner, message in
                 owner.showAlert(message: message)
