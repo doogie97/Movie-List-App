@@ -122,7 +122,7 @@ final class HomeView: UIView {
     }()
     
     @objc private func touchCancelButton() {
-        touchXbutton()
+        xButtonView.isHidden = true
         UIView.animate(withDuration: 0.2) { [weak self] in
             self?.movieListView.layer.opacity = 1
         }
