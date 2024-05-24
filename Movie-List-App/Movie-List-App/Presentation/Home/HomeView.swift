@@ -124,6 +124,7 @@ final class HomeView: UIView {
     }()
     
     @objc private func touchCancelButton() {
+        touchXbutton()
         self.endEditing(true)
     }
     
