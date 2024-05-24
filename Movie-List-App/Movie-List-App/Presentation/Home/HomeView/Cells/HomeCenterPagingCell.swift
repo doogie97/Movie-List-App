@@ -10,6 +10,29 @@ import SnapKit
 import Kingfisher
 
 final class HomeCenterPagingCell: UICollectionViewCell {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientView.layer.addSublayer(gradientLayer)
+    }
+    
+    private lazy var gradientView = UIView()
+    private lazy var gradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0,
+                                y: 0,
+                                width: self.frame.width,
+                                height: self.frame.height / 2)
+        let colors: [CGColor] = [
+            .init(red: 0, green: 0, blue: 0, alpha: 0),
+            .init(red: 0, green: 0, blue: 0, alpha: 0.4),
+            .init(red: 0, green: 0, blue: 0, alpha: 0.8),
+            .init(red: 0, green: 0, blue: 0, alpha: 1)
+        ]
+        gradient.colors = colors
+        
+        return gradient
+    }()
+    
     private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 6
@@ -28,23 +51,22 @@ final class HomeCenterPagingCell: UICollectionViewCell {
     
     private func setLayout() {
         self.contentView.addSubview(posterImageView)
-//        self.contentView.addSubview(titleLabel)
+        self.contentView.addSubview(gradientView)
         
         posterImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-//        titleLabel.snp.makeConstraints {
-//            $0.top.equalTo(posterImageView.snp.bottom).inset(-4)
-//            $0.bottom.equalToSuperview()
-//            $0.left.trailing.equalToSuperview()
-//        }
+        gradientView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalToSuperview().dividedBy(2)
+        }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         posterImageView.kf.cancelDownloadTask()
         posterImageView.image = nil
+        gradientLayer.removeFromSuperlayer()
     }
 }
-
