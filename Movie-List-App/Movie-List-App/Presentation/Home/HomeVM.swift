@@ -40,7 +40,7 @@ final class HomeVM: HomeVMable {
         isLoading.accept(true)
         self.keyword = keyword
         self.movieSectionList = []
-        self.isEmptyResult = false
+        
         Task {
             do {
                 try await requestList(searchType: .movie)
