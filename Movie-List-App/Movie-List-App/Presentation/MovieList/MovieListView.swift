@@ -11,10 +11,28 @@ import SnapKit
 final class MovieListView: UIView {
     init() {
         super.init(frame: .zero)
-        self.backgroundColor = .systemRed
+        setLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private(set) lazy var navigationBar = DefaultNavigationBar(title: "")
+    
+    func setViewContents(viewModel: MovieListVMable,
+                         keyword: String,
+                         searchType: MovieType) {
+        self.navigationBar.titleLabel.text = "\(searchType.title) 목록"
+    }
+    
+    private func setLayout() {
+        self.backgroundColor = .systemBackground
+        self.addSubview(navigationBar)
+        
+        navigationBar.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).inset(8)
+            $0.leading.trailing.equalTo(safeAreaLayoutGuide)
+        }
     }
 }

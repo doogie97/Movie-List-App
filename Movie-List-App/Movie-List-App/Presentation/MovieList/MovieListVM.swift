@@ -5,11 +5,17 @@
 //  Created by Doogie on 5/25/24.
 //
 
+import RxRelay
+
 protocol MovieListVMable: MovieListVMInput, MovieListVMOutput, AnyObject {}
 
-protocol MovieListVMInput {}
+protocol MovieListVMInput {
+    func viewDidLoad()
+}
 
-protocol MovieListVMOutput {}
+protocol MovieListVMOutput {
+    var setViewContents: PublishRelay<(keyword: String, searchType: MovieType)> { get }
+}
 
 final class MovieListVM: MovieListVMable {
     private let keyword: String
@@ -22,4 +28,12 @@ final class MovieListVM: MovieListVMable {
         print(keyword)
         print(searchType)
     }
+    
+    //MARK: - Intpu
+    func viewDidLoad() {
+        setViewContents.accept((keyword: keyword, searchType: searchType))
+    }
+    
+    //MARK: - Output
+    let setViewContents = PublishRelay<(keyword: String, searchType: MovieType)>()
 }
