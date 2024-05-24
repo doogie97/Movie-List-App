@@ -35,6 +35,7 @@ final class HomeView: UIView {
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16, height: 0.0))
         textField.rightViewMode = .always
         textField.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16, height: 0.0))
+        textField.returnKeyType = .search
 
         
         return textField
