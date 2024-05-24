@@ -7,9 +7,44 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class HomeHorizontalCell: UICollectionViewCell {
+    private lazy var posterImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 6
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
+    private lazy var titleLabel = pretendardLabel()
+    
     func setCellContents(movie: MovieList.Movie) {
-        self.backgroundColor = .systemBlue
+        posterImageView.setImage(movie.imageUrl)
+        titleLabel.text = movie.title
+        setLayout()
+    }
+    
+    private func setLayout() {
+        self.contentView.addSubview(posterImageView)
+        self.contentView.addSubview(titleLabel)
+        
+        posterImageView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(160)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(posterImageView.snp.bottom).inset(-4)
+            $0.bottom.equalToSuperview()
+            $0.left.trailing.equalToSuperview()
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        posterImageView.kf.cancelDownloadTask()
+        posterImageView.image = nil
     }
 }
