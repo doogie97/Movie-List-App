@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class HomeSectionHeader: UICollectionReusableView {
+    private weak var viewModel: HomeVMable?
+    private var sectionIndex: Int?
     private lazy var titleLabel = pretendardLabel(family: .SemiBold, size: 18)
     
     private lazy var countLabel = pretendardLabel(family: .Regular, size: 14, color: .xButtonBG)
@@ -49,12 +51,17 @@ final class HomeSectionHeader: UICollectionReusableView {
     }()
     
     @objc private func touchMoreButton() {
-        print("전체보기")
+        if let sectionIndex = self.sectionIndex {
+            viewModel?.touchMoreButton(sectionIndex: sectionIndex)
+        }
     }
     
     func setViewContents(viewModel: HomeVMable?,
                          searchType: MovieType,
-                         totalCount: Int) {
+                         totalCount: Int,
+                         sectionIndex: Int) {
+        self.viewModel = viewModel
+        self.sectionIndex = sectionIndex
         titleLabel.text = searchType.title
         countLabel.text = "(\(totalCount))"
         setLayout()

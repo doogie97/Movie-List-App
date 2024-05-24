@@ -12,6 +12,7 @@ protocol HomeVMable: HomeVMInput, HomeVMOutput, AnyObject {}
 
 protocol HomeVMInput {
     func getMovieList(keyword: String)
+    func touchMoreButton(sectionIndex: Int)
 }
 
 protocol HomeVMOutput {
@@ -78,6 +79,10 @@ final class HomeVM: HomeVMable {
                 movieSectionList.append(list)
             }
         }
+    }
+    
+    func touchMoreButton(sectionIndex: Int) {
+        print("\(sectionIndex)번 섹션 전체보기")
     }
     
     //MARK: - Output

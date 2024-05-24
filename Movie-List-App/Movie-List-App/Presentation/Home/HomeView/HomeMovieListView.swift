@@ -172,7 +172,8 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             
             header.setViewContents(viewModel: viewModel,
                                    searchType: section.movieType,
-                                   totalCount: section.totalCount)
+                                   totalCount: section.totalCount,
+                                   sectionIndex: indexPath.section)
             return header
         } else {
             return UICollectionViewCell()
