@@ -51,7 +51,7 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .realTimeBest)
                 try await requestList(searchType: .all)
                 await MainActor.run {
-                    if movieSectionList.isEmpty {
+                    if movieSectionList.isEmpty || (movieSectionList.count == 1 && movieSectionList.first?.movieType == .realTimeBest) {
                         showAlert.accept("검색 결과가 없습니다.")
                     }
                     searchFinished.accept(())
