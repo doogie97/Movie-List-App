@@ -172,7 +172,10 @@ extension HomeView {
         
         viewModel?.searchFinished.withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.movieListView.layer.opacity = 1
+                UIView.animate(withDuration: 0.2) {
+                    owner.movieListView.layer.opacity = 1
+                    owner.layoutIfNeeded()
+                }
             })
             .disposed(by: disposeBag)
     }
