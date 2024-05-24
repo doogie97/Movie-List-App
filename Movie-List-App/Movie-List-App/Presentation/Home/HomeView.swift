@@ -42,9 +42,18 @@ final class HomeView: UIView {
         textField.inputAccessoryView = nil
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
+        textField.addTarget(self, action: #selector(changedTextField), for: .editingChanged)
         
         return textField
     }()
+    
+    @objc private func changedTextField(_ textField: UITextField) {
+        if textField.text?.isEmpty == true {
+            print("x버튼 hidden")
+        } else {
+            print("x버튼 활성화")
+        }
+    }
     
     private func setLayout() {
         self.addSubview(searchField)
@@ -58,6 +67,12 @@ final class HomeView: UIView {
 }
 
 extension HomeView: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("최근 검색 기록 표시")
+        print("취소 버튼 노출")
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         viewModel?.getMovieList(keyword: textField.text ?? "")
         return true
