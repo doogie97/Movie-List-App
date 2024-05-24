@@ -30,21 +30,72 @@ final class HomeView: UIView {
     
     private lazy var searchField: UITextField = {
         let textField = UITextField()
+        textField.delegate = self
         textField.backgroundColor = .searchBar
         textField.layer.cornerRadius = 19
         textField.placeholder = "검색어를 입력해 주세요."
         textField.leftViewMode = .always
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16, height: 0.0))
         textField.rightViewMode = .always
-        textField.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16, height: 0.0))
+        textField.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 34, height: 0.0))
         textField.returnKeyType = .search
-        textField.delegate = self
         textField.inputAccessoryView = nil
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         textField.addTarget(self, action: #selector(changedTextField), for: .editingChanged)
         textField.font = .pretendard(.Regular, 14)
+        
+        textField.addSubview(xButtonView)
+        xButtonView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(4)
+            $0.width.equalTo(30)
+        }
+        
         return textField
+    }()
+    
+    private lazy var xButtonView: UIView = {
+        let view = UIView()
+        let circleView = UIView()
+        circleView.backgroundColor = .xButtonBG
+        let buttonImage = UIImage(
+            systemName: "xmark",
+            withConfiguration: UIImage.SymbolConfiguration(weight: .bold)
+        )?.withRenderingMode(.alwaysTemplate)
+        let buttonImageView = UIImageView(
+            image: buttonImage)
+        
+        buttonImageView.tintColor = .white
+        
+        circleView.addSubview(buttonImageView)
+        buttonImageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalTo(8)
+            $0.height.equalTo(12)
+        }
+        
+        view.addSubview(circleView)
+        view.addSubview(textXButton)
+        
+        circleView.snp.makeConstraints {
+            $0.height.width.equalTo(18)
+            $0.center.equalToSuperview()
+            circleView.layer.cornerRadius = 9
+        }
+        
+        textXButton.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        return view
+    }()
+    
+    private lazy var textXButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 9
+        
+        return button
     }()
     
     @objc private func changedTextField(_ textField: UITextField) {
