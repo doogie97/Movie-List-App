@@ -16,6 +16,7 @@ protocol HomeVMInput {
 
 protocol HomeVMOutput {
     var isLoading: PublishRelay<Bool> { get }
+    var showAlert: PublishRelay<String> { get }
 }
 
 final class HomeVM: HomeVMable {
@@ -39,13 +40,13 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .episode)
                 await MainActor.run {
                     if movieSectionList.isEmpty {
-                        print("검색 결과가 없습니다.")
+                        showAlert.accept("검색 결과가 없습니다.")
                     }
                     isLoading.accept(false)
                 }
             } catch let error {
                 await MainActor.run {
-                    print(error.errorMessage)
+                    showAlert.accept(error.errorMessage)
                     isLoading.accept(false)
                 }
             }
@@ -60,5 +61,6 @@ final class HomeVM: HomeVMable {
     }
     
     //MARK: - Output
-    var isLoading = PublishRelay<Bool>()
+    let isLoading = PublishRelay<Bool>()
+    let showAlert = PublishRelay<String>()
 }
