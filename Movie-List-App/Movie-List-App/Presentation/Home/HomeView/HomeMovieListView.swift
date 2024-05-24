@@ -156,7 +156,7 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         let section = NSCollectionLayoutSection(group: group)
         
         section.orthogonalScrollingBehavior = .groupPagingCentered
-        section.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
+        section.contentInsets = .init(top: 4, leading: 0, bottom: 8, trailing: 0)
         
         let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(80))
         section.boundarySupplementaryItems = [.init(layoutSize: sectionHeaderSize,

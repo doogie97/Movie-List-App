@@ -65,17 +65,7 @@ final class HomeVM: HomeVMable {
     private func requestList(searchType: MovieType) async throws {
         let list = try await getMovieListUseCase.execute(keyword: keyword, searchType: searchType, page: 1)
         if list.totalCount != 0 {
-            if searchType == .all && list.movieList.count > 5 {
-                var movieList = list.movieList
-                movieList = Array(movieList.prefix(5))
-                movieSectionList.append(MovieList(
-                    movieType: .all,
-                    totalCount: list.totalCount,
-                    movieList: movieList
-                ))
-            } else {
-                movieSectionList.append(list)
-            }
+            movieSectionList.append(list)
         }
     }
     
