@@ -19,7 +19,7 @@ protocol HomeVMInput {
 protocol HomeVMOutput {
     var isLoading: PublishRelay<Bool> { get }
     var showAlert: PublishRelay<String> { get }
-    var searchFinished: PublishRelay<Void> { get }
+    var searchFinished: PublishRelay<Bool> { get }
     var keyword: String { get }
     var movieSectionList: [MovieList] { get }
 }
@@ -40,6 +40,7 @@ final class HomeVM: HomeVMable {
         isLoading.accept(true)
         self.keyword = keyword
         self.movieSectionList = []
+        self.isEmptyResult = false
         Task {
             do {
                 try await requestList(searchType: .movie)
@@ -48,10 +49,8 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .realTimeBest)
                 try await requestList(searchType: .all)
                 await MainActor.run {
-                    if movieSectionList.isEmpty || (movieSectionList.count == 1 && movieSectionList.first?.movieType == .realTimeBest) {
-                        showAlert.accept("검색 결과가 없습니다.")
-                    }
-                    searchFinished.accept(())
+                    let isEmptyResult = movieSectionList.isEmpty || (movieSectionList.count == 1 && movieSectionList.first?.movieType == .realTimeBest)
+                    searchFinished.accept(isEmptyResult)
                     isLoading.accept(false)
                 }
             } catch let error {
@@ -101,7 +100,7 @@ final class HomeVM: HomeVMable {
     
     let isLoading = PublishRelay<Bool>()
     let showAlert = PublishRelay<String>()
-    let searchFinished = PublishRelay<Void>()
+    let searchFinished = PublishRelay<Bool>()
     var keyword = ""
     var movieSectionList = [MovieList]()
 }

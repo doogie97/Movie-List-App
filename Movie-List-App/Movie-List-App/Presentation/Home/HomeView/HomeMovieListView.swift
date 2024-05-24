@@ -24,12 +24,25 @@ final class HomeMovieListView: UIView {
     }
     
     private lazy var homeCollectionView = createSectionCollectionView()
+    private lazy var emptyView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        view.isHidden = true
+        
+        return view
+    }()
+    
     private func setLayout() {
         self.addSubview(homeCollectionView)
+        self.addSubview(emptyView)
         
         homeCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
             $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        emptyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }
@@ -38,9 +51,10 @@ final class HomeMovieListView: UIView {
 extension HomeMovieListView {
     private func bindViewModel() {
         viewModel?.searchFinished.withUnretained(self)
-            .subscribe(onNext: { owner, _ in
+            .subscribe(onNext: { owner, isEmptyResult in
                 owner.homeCollectionView = owner.createSectionCollectionView()
                 owner.setLayout()
+                owner.emptyView.isHidden = !isEmptyResult
             })
             .disposed(by: disposeBag)
     }
