@@ -28,11 +28,12 @@ final class HomeMovieListView: UIView {
     }
 }
 
+//MARK: - Bind ViewModel
 extension HomeMovieListView {
     private func bindViewModel() {
-        viewModel?.movieSectionInfo.withUnretained(self)
-            .subscribe(onNext: { owner, info in
-                print(info.searchKeyword)
+        viewModel?.searchFinished.withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                print(owner.viewModel?.keyword)
             })
             .disposed(by: disposeBag)
     }
