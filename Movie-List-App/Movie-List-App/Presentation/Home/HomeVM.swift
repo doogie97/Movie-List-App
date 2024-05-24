@@ -5,13 +5,18 @@
 //  Created by Doogie on 5/23/24.
 //
 
+import RxRelay
+import Foundation
+
 protocol HomeVMable: HomeVMInput, HomeVMOutput {}
 
 protocol HomeVMInput {
     func getMovieList(keyword: String)
 }
 
-protocol HomeVMOutput {}
+protocol HomeVMOutput {
+    var isLoading: PublishRelay<Bool> { get }
+}
 
 final class HomeVM: HomeVMable {
     private let getMovieListUseCase: GetMovieListUseCase
@@ -24,6 +29,7 @@ final class HomeVM: HomeVMable {
     
     //MARK: Input
     func getMovieList(keyword: String) {
+        isLoading.accept(true)
         self.keyword = keyword
         self.movieSectionList = []
         Task {
@@ -35,10 +41,12 @@ final class HomeVM: HomeVMable {
                     if movieSectionList.isEmpty {
                         print("검색 결과가 없습니다.")
                     }
+                    isLoading.accept(false)
                 }
             } catch let error {
                 await MainActor.run {
                     print(error.errorMessage)
+                    isLoading.accept(false)
                 }
             }
         }
@@ -50,4 +58,7 @@ final class HomeVM: HomeVMable {
             movieSectionList.append(list)
         }
     }
+    
+    //MARK: - Output
+    var isLoading = PublishRelay<Bool>()
 }
