@@ -43,7 +43,7 @@ final class HomeView: UIView {
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         textField.addTarget(self, action: #selector(changedTextField), for: .editingChanged)
-        
+        textField.font = .pretendard(.Regular, 14)
         return textField
     }()
     
@@ -59,8 +59,7 @@ final class HomeView: UIView {
         self.addSubview(searchField)
         
         searchField.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.leading.trailing.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(40)
         }
     }
