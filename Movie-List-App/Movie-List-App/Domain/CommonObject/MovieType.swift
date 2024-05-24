@@ -21,7 +21,7 @@ enum MovieType: String {
         case .episode:
             return "에피소드"
         case .realTimeBest:
-            return "실시간 베스트"
+            return "실시간 베스트 순위"
         case .all:
             return "전체"
         }

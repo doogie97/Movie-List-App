@@ -11,7 +11,7 @@ import SnapKit
 final class HomeCenterPagingHeader: UICollectionReusableView {
     private lazy var titleLabel = pretendardLabel(family: .SemiBold, size: 18, text: "이런 영화는 어때요?")
     
-    private lazy var subTitleLabel = pretendardLabel()
+    private lazy var subTitleLabel = pretendardLabel(color: .xButtonBG)
     
     func setViewContents(searchType: MovieType) {
         subTitleLabel.text = searchType.title
@@ -23,7 +23,7 @@ final class HomeCenterPagingHeader: UICollectionReusableView {
         self.addSubview(subTitleLabel)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().inset(24)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
         
