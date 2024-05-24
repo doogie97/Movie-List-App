@@ -5,13 +5,20 @@
 //  Created by Doogie on 5/23/24.
 //
 
-protocol HomeVMable: HomeVMInput, HomeVMOutput {}
+import RxRelay
+import Foundation
+
+protocol HomeVMable: HomeVMInput, HomeVMOutput, AnyObject {}
 
 protocol HomeVMInput {
     func getMovieList(keyword: String)
 }
 
-protocol HomeVMOutput {}
+protocol HomeVMOutput {
+    var isLoading: PublishRelay<Bool> { get }
+    var showAlert: PublishRelay<String> { get }
+    var movieSectionInfo: PublishRelay<HomeVM.MovieSectionInfo> { get }
+}
 
 final class HomeVM: HomeVMable {
     private let getMovieListUseCase: GetMovieListUseCase
@@ -24,6 +31,12 @@ final class HomeVM: HomeVMable {
     
     //MARK: Input
     func getMovieList(keyword: String) {
+        if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
+            showAlert.accept("검색어를 입력해 주세요.")
+            return
+        }
+        
+        isLoading.accept(true)
         self.keyword = keyword
         self.movieSectionList = []
         Task {
@@ -33,12 +46,18 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .episode)
                 await MainActor.run {
                     if movieSectionList.isEmpty {
-                        print("검색 결과가 없습니다.")
+                        showAlert.accept("검색 결과가 없습니다.")
                     }
+                    movieSectionInfo.accept(MovieSectionInfo(
+                        searchKeyword: keyword,
+                        movieSectionList: self.movieSectionList
+                    ))
+                    isLoading.accept(false)
                 }
             } catch let error {
                 await MainActor.run {
-                    print(error.errorMessage)
+                    showAlert.accept(error.errorMessage)
+                    isLoading.accept(false)
                 }
             }
         }
@@ -50,4 +69,14 @@ final class HomeVM: HomeVMable {
             movieSectionList.append(list)
         }
     }
+    
+    //MARK: - Output
+    struct MovieSectionInfo {
+        let searchKeyword: String
+        let movieSectionList: [MovieList]
+    }
+    
+    let isLoading = PublishRelay<Bool>()
+    let showAlert = PublishRelay<String>()
+    let movieSectionInfo = PublishRelay<MovieSectionInfo>()
 }

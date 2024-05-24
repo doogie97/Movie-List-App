@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
 final class HomeVC: UIViewController {
     private let viewModel: HomeVMable
-    private let homeView = HomeView()
+    private let homeView: HomeView
+    private let disposeBag = DisposeBag()
     
     init(viewModel: HomeVMable) {
         self.viewModel = viewModel
+        self.homeView = HomeView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,7 +30,16 @@ final class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModel()
         viewModel.getMovieList(keyword: "star")
+    }
+    
+    private func bindViewModel() {
+        viewModel.showAlert.withUnretained(self)
+            .subscribe { owner, message in
+                owner.showAlert(message: message)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
