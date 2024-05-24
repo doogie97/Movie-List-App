@@ -9,7 +9,7 @@ import UIKit
 
 extension UIFont {
     enum Family: String {
-        case SemiBold, Regular, Bold
+        case SemiBold, Regular, Bold, Black
     }
     
     static func pretendard(_ family: Family, _ size: CGFloat) -> UIFont {
