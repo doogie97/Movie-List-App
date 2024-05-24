@@ -57,6 +57,7 @@ final class HomeView: UIView {
     
     private lazy var xButtonView: UIView = {
         let view = UIView()
+        view.isHidden = true
         let circleView = UIView()
         circleView.backgroundColor = .xButtonBG
         let buttonImage = UIImage(
@@ -100,9 +101,9 @@ final class HomeView: UIView {
     
     @objc private func changedTextField(_ textField: UITextField) {
         if textField.text?.isEmpty == true {
-            print("x버튼 hidden")
+            xButtonView.isHidden = true
         } else {
-            print("x버튼 활성화")
+            xButtonView.isHidden = false
         }
     }
     
@@ -150,6 +151,7 @@ extension HomeView: UITextFieldDelegate {
             print("최근 검색 기록 표시")
             self?.layoutIfNeeded()
         }
+        xButtonView.isHidden = textField.text?.isEmpty == true
         return true
     }
     
@@ -163,6 +165,8 @@ extension HomeView: UITextFieldDelegate {
             print("검색 결과 화면 보여주기")
             self?.layoutIfNeeded()
         }
+        
+        xButtonView.isHidden = true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
