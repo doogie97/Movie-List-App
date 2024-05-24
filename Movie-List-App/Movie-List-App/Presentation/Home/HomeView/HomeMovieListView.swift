@@ -60,9 +60,13 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
                                 forCellWithReuseIdentifier: "\(HomeVerticalCell.self)")
         collectionView.register(HomeCenterPagingCell.self,
                                 forCellWithReuseIdentifier: "\(HomeCenterPagingCell.self)")
+        
         collectionView.register(HomeSectionHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: "\(HomeSectionHeader.self)")
+        collectionView.register(HomeCenterPagingHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "\(HomeCenterPagingHeader.self)")
         
         return collectionView
     }
@@ -139,7 +143,7 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         section.orthogonalScrollingBehavior = .groupPagingCentered
         section.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
         
-        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(80))
         section.boundarySupplementaryItems = [.init(layoutSize: sectionHeaderSize,
                                                     elementKind: UICollectionView.elementKindSectionHeader,
                                                     alignment: .topLeading)]
@@ -204,19 +208,27 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            guard let section = viewModel?.movieSectionList[safe: indexPath.section],
-                  let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(HomeSectionHeader.self)", for: indexPath) as? HomeSectionHeader else {
+            guard let section = viewModel?.movieSectionList[safe: indexPath.section] else {
                 return UICollectionReusableView()
             }
-            
-            header.setViewContents(viewModel: viewModel,
-                                   searchType: section.movieType,
-                                   totalCount: section.totalCount,
-                                   sectionIndex: indexPath.section)
-            return header
-        } else {
-            return UICollectionViewCell()
+            switch section.movieType {
+            case .movie, .series, .episode, .all:
+                if let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(HomeSectionHeader.self)", for: indexPath) as? HomeSectionHeader {
+                    header.setViewContents(viewModel: viewModel,
+                                           searchType: section.movieType,
+                                           totalCount: section.totalCount,
+                                           sectionIndex: indexPath.section)
+                    return header
+                }
+            case .realTimeBest :
+                if let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(HomeCenterPagingHeader.self)", for: indexPath) as? HomeCenterPagingHeader {
+                    header.setViewContents(searchType: section.movieType)
+                    return header
+                }
+            }
         }
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

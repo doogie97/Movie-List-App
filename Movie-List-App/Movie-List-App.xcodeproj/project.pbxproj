@@ -20,6 +20,7 @@
 		C694AE842C0067DD00C65730 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE832C0067DD00C65730 /* UIView+Extension.swift */; };
 		C694AE862C0070B200C65730 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE852C0070B200C65730 /* UIImageView+Extension.swift */; };
 		C694AE882C00819F00C65730 /* HomeCenterPagingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE872C00819F00C65730 /* HomeCenterPagingCell.swift */; };
+		C694AE8A2C00899100C65730 /* HomeCenterPagingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE892C00899100C65730 /* HomeCenterPagingHeader.swift */; };
 		C6F3AC872BFF684000A108D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC862BFF684000A108D9 /* AppDelegate.swift */; };
 		C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */; };
 		C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC8A2BFF684000A108D9 /* HomeVC.swift */; };
@@ -61,6 +62,7 @@
 		C694AE832C0067DD00C65730 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C694AE852C0070B200C65730 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		C694AE872C00819F00C65730 /* HomeCenterPagingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCenterPagingCell.swift; sourceTree = "<group>"; };
+		C694AE892C00899100C65730 /* HomeCenterPagingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCenterPagingHeader.swift; sourceTree = "<group>"; };
 		C6F3AC832BFF684000A108D9 /* Movie-List-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie-List-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F3AC862BFF684000A108D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				C6F3ACD62BFF763900A108D9 /* HomeView.swift */,
 				C694AE782C004D6B00C65730 /* HomeMovieListView.swift */,
 				C694AE812C00675600C65730 /* HomeSectionHeader.swift */,
+				C694AE892C00899100C65730 /* HomeCenterPagingHeader.swift */,
 				C694AE7C2C00587000C65730 /* Cells */,
 			);
 			path = HomeView;
@@ -387,6 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C694AE8A2C00899100C65730 /* HomeCenterPagingHeader.swift in Sources */,
 				C6F3ACCE2BFF744000A108D9 /* NetworkRepository.swift in Sources */,
 				C6F3ACE32BFF790100A108D9 /* MovieListGET.swift in Sources */,
 				C6F3ACDD2BFF776C00A108D9 /* HomeVM.swift in Sources */,
