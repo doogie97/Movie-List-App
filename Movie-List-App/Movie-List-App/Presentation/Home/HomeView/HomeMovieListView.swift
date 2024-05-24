@@ -39,7 +39,8 @@ extension HomeMovieListView {
     private func bindViewModel() {
         viewModel?.searchFinished.withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.homeCollectionView.reloadData()
+                owner.homeCollectionView = owner.createSectionCollectionView()
+                owner.setLayout()
             })
             .disposed(by: disposeBag)
     }
