@@ -36,7 +36,7 @@ final class HomeView: UIView {
         textField.rightViewMode = .always
         textField.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16, height: 0.0))
         textField.returnKeyType = .search
-
+        textField.delegate = self
         
         return textField
     }()
@@ -49,5 +49,12 @@ final class HomeView: UIView {
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(40)
         }
+    }
+}
+
+extension HomeView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print(textField.text)
+        return true
     }
 }
