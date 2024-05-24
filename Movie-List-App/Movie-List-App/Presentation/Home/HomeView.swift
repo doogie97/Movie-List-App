@@ -31,7 +31,7 @@ final class HomeView: UIView {
     private lazy var searchField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .searchBar
-        textField.layer.cornerRadius = 20
+        textField.layer.cornerRadius = 19
         textField.placeholder = "검색어를 입력해 주세요."
         textField.leftViewMode = .always
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16, height: 0.0))
@@ -55,21 +55,63 @@ final class HomeView: UIView {
         }
     }
     
+    private lazy var cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = .pretendard(.Regular, 18)
+        button.layer.opacity = 0
+        button.addTarget(self, action: #selector(touchCancelButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc private func touchCancelButton() {
+        self.endEditing(true)
+    }
+    
     private func setLayout() {
         self.addSubview(searchField)
+        self.addSubview(cancelButton)
         
         searchField.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(safeAreaLayoutGuide).inset(16)
-            $0.height.equalTo(40)
+            $0.top.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(38)
+        }
+        
+        cancelButton.snp.makeConstraints {
+            $0.top.bottom.equalTo(searchField)
+            $0.leading.equalTo(searchField.snp.trailing).inset(-4)
+            $0.width.equalTo(50)
         }
     }
 }
 
 extension HomeView: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        print("최근 검색 기록 표시")
-        print("취소 버튼 노출")
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.searchField.snp.updateConstraints {
+                $0.trailing.equalToSuperview().inset(58)
+            }
+            
+            self?.cancelButton.layer.opacity = 1
+            print("최근 검색 기록 표시")
+            self?.layoutIfNeeded()
+        }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.searchField.snp.updateConstraints {
+                $0.trailing.equalToSuperview().inset(16)
+            }
+            
+            self?.cancelButton.layer.opacity = 0
+            print("검색 결과 화면 보여주기")
+            self?.layoutIfNeeded()
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
