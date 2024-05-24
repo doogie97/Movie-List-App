@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		C694AE6A2C00136300C65730 /* ViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE692C00136300C65730 /* ViewController+extension.swift */; };
+		C694AE722C002B6A00C65730 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */; };
+		C694AE732C002B6A00C65730 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE702C002B6A00C65730 /* Pretendard-Bold.otf */; };
+		C694AE742C002B6A00C65730 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE712C002B6A00C65730 /* Pretendard-Regular.otf */; };
+		C694AE762C002BED00C65730 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE752C002BED00C65730 /* UIFont+Extension.swift */; };
 		C6F3AC872BFF684000A108D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC862BFF684000A108D9 /* AppDelegate.swift */; };
 		C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */; };
 		C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC8A2BFF684000A108D9 /* HomeVC.swift */; };
@@ -37,6 +41,10 @@
 /* Begin PBXFileReference section */
 		C694AE692C00136300C65730 /* ViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+extension.swift"; sourceTree = "<group>"; };
 		C694AE6D2C0023EB00C65730 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		C694AE702C002B6A00C65730 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		C694AE712C002B6A00C65730 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		C694AE752C002BED00C65730 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		C6F3AC832BFF684000A108D9 /* Movie-List-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie-List-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F3AC862BFF684000A108D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,8 +88,19 @@
 			isa = PBXGroup;
 			children = (
 				C694AE692C00136300C65730 /* ViewController+extension.swift */,
+				C694AE752C002BED00C65730 /* UIFont+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C694AE6E2C002B2D00C65730 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C694AE702C002B6A00C65730 /* Pretendard-Bold.otf */,
+				C694AE712C002B6A00C65730 /* Pretendard-Regular.otf */,
+				C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		C6F3AC7A2BFF684000A108D9 = {
@@ -137,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F3AC8F2BFF684100A108D9 /* Assets.xcassets */,
+				C694AE6E2C002B2D00C65730 /* Fonts */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -312,6 +332,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C694AE722C002B6A00C65730 /* Pretendard-SemiBold.otf in Resources */,
+				C694AE732C002B6A00C65730 /* Pretendard-Bold.otf in Resources */,
+				C694AE742C002B6A00C65730 /* Pretendard-Regular.otf in Resources */,
 				C6F3AC932BFF684100A108D9 /* LaunchScreen.storyboard in Resources */,
 				C6F3AC902BFF684100A108D9 /* Assets.xcassets in Resources */,
 			);
@@ -330,6 +353,7 @@
 				C6F3ACEB2BFF818700A108D9 /* MovieList.swift in Sources */,
 				C6F3ACCC2BFF72B000A108D9 /* NetworkManager.swift in Sources */,
 				C694AE6A2C00136300C65730 /* ViewController+extension.swift in Sources */,
+				C694AE762C002BED00C65730 /* UIFont+Extension.swift in Sources */,
 				C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */,
 				C6F3ACC62BFF6FB600A108D9 /* Requestable.swift in Sources */,
 				C6F3ACE92BFF813000A108D9 /* MovieType.swift in Sources */,
