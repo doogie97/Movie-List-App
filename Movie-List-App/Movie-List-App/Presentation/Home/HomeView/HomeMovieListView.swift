@@ -129,12 +129,12 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
     
     private func centerPagingSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalWidth(1.36))
+                                              heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                              heightDimension: .fractionalWidth(1.43))
+                                              heightDimension: .fractionalWidth(1.22))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
         
