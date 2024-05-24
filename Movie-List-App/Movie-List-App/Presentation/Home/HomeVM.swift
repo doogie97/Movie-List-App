@@ -48,6 +48,7 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .movie)
                 try await requestList(searchType: .series)
                 try await requestList(searchType: .episode)
+                try await requestList(searchType: .realTimeBest)
                 try await requestList(searchType: .all)
                 await MainActor.run {
                     if movieSectionList.isEmpty {

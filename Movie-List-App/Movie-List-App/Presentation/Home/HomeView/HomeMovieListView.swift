@@ -76,7 +76,7 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             switch sectionCase {
             case .movie, .series, .episode:
                 return self?.horizontalSectionLayout()
-            case .all:
+            case .realTimeBest, .all:
                 return self?.verticalSectionLayout()
             }
         }
@@ -136,7 +136,7 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         }
         
         switch section.movieType {
-        case .movie, .series, .episode:
+        case .movie, .series, .episode, .realTimeBest:
             return horizontalCell(collectionView: collectionView,
                                   indexPath: indexPath,
                                   movie: movie)

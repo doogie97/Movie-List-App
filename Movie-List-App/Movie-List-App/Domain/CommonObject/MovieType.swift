@@ -9,6 +9,7 @@ enum MovieType: String {
     case movie
     case series
     case episode
+    case realTimeBest
     case all
     
     var title: String {
@@ -19,6 +20,8 @@ enum MovieType: String {
             return "시리즈"
         case .episode:
             return "에피소드"
+        case .realTimeBest:
+            return "실시간 베스트"
         case .all:
             return "전체"
         }
