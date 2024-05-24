@@ -94,10 +94,15 @@ final class HomeView: UIView {
     
     private lazy var textXButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 9
+        button.addTarget(self, action: #selector(touchXbutton), for: .touchUpInside)
         
         return button
     }()
+    
+    @objc private func touchXbutton() {
+        searchField.text = ""
+        xButtonView.isHidden = true
+    }
     
     @objc private func changedTextField(_ textField: UITextField) {
         if textField.text?.isEmpty == true {
