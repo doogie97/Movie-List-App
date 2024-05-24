@@ -73,7 +73,7 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
             case .movie, .series, .episode:
                 return self?.horizontalSectionLayout()
             case .all:
-                return nil
+                return self?.verticalSectionLayout()
             }
         }
     }
@@ -88,9 +88,23 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         let section = NSCollectionLayoutSection(group: group)
         
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = .init(top: 0, leading: 4, bottom: 8, trailing: 4)
+        section.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
         return section
     }
+    
+    private func verticalSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .absolute(150))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.contentInsets = .init(top: 0, leading: 4, bottom: 4, trailing: 4)
+        return section
+    }
+
     
     //DataSource, Delegate
     func numberOfSections(in collectionView: UICollectionView) -> Int {
