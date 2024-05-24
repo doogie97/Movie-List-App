@@ -48,6 +48,11 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        collectionView.register(HomeHorizontalCell.self,
+                                forCellWithReuseIdentifier: "\(HomeHorizontalCell.self)")
+        collectionView.register(HomeVerticalCell.self,
+                                forCellWithReuseIdentifier: "\(HomeVerticalCell.self)")
+        
         return collectionView
     }
     
@@ -80,6 +85,36 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        guard let section = viewModel?.movieSectionList[safe: indexPath.section],
+              let movie = section.movieList[safe: indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        switch section.movieType {
+        case .movie, .series, .episode:
+            return horizontalCell(collectionView: collectionView,
+                                  indexPath: indexPath,
+                                  movie: movie)
+        case .all:
+            return verticalCell(collectionView: collectionView,
+                                indexPath: indexPath,
+                                movie: movie)
+        }
+    }
+    
+    private func horizontalCell(collectionView: UICollectionView, indexPath: IndexPath, movie: MovieList.Movie) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(HomeHorizontalCell.self)", for: indexPath) as? HomeHorizontalCell else {
+            return UICollectionViewCell()
+        }
+        cell.setCellContents(movie: movie)
+        return cell
+    }
+    
+    private func verticalCell(collectionView: UICollectionView, indexPath: IndexPath, movie: MovieList.Movie) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(HomeVerticalCell.self)", for: indexPath) as? HomeVerticalCell else {
+            return UICollectionViewCell()
+        }
+        cell.setCellContents(movie: movie)
+        return cell
     }
 }

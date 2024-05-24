@@ -14,6 +14,8 @@
 		C694AE762C002BED00C65730 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE752C002BED00C65730 /* UIFont+Extension.swift */; };
 		C694AE792C004D6B00C65730 /* HomeMovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE782C004D6B00C65730 /* HomeMovieListView.swift */; };
 		C694AE7B2C0056EB00C65730 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE7A2C0056EB00C65730 /* Collection+Extension.swift */; };
+		C694AE7E2C00587A00C65730 /* HomeHorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE7D2C00587A00C65730 /* HomeHorizontalCell.swift */; };
+		C694AE802C0058AD00C65730 /* HomeVerticalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE7F2C0058AD00C65730 /* HomeVerticalCell.swift */; };
 		C6F3AC872BFF684000A108D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC862BFF684000A108D9 /* AppDelegate.swift */; };
 		C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */; };
 		C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F3AC8A2BFF684000A108D9 /* HomeVC.swift */; };
@@ -49,6 +51,8 @@
 		C694AE752C002BED00C65730 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		C694AE782C004D6B00C65730 /* HomeMovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMovieListView.swift; sourceTree = "<group>"; };
 		C694AE7A2C0056EB00C65730 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		C694AE7D2C00587A00C65730 /* HomeHorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHorizontalCell.swift; sourceTree = "<group>"; };
+		C694AE7F2C0058AD00C65730 /* HomeVerticalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVerticalCell.swift; sourceTree = "<group>"; };
 		C6F3AC832BFF684000A108D9 /* Movie-List-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie-List-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F3AC862BFF684000A108D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F3AC882BFF684000A108D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,8 +117,18 @@
 			children = (
 				C6F3ACD62BFF763900A108D9 /* HomeView.swift */,
 				C694AE782C004D6B00C65730 /* HomeMovieListView.swift */,
+				C694AE7C2C00587000C65730 /* Cells */,
 			);
 			path = HomeView;
+			sourceTree = "<group>";
+		};
+		C694AE7C2C00587000C65730 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C694AE7D2C00587A00C65730 /* HomeHorizontalCell.swift */,
+				C694AE7F2C0058AD00C65730 /* HomeVerticalCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		C6F3AC7A2BFF684000A108D9 = {
@@ -371,10 +385,12 @@
 				C6F3AC8B2BFF684000A108D9 /* HomeVC.swift in Sources */,
 				C694AE792C004D6B00C65730 /* HomeMovieListView.swift in Sources */,
 				C694AE7B2C0056EB00C65730 /* Collection+Extension.swift in Sources */,
+				C694AE802C0058AD00C65730 /* HomeVerticalCell.swift in Sources */,
 				C6F3ACC62BFF6FB600A108D9 /* Requestable.swift in Sources */,
 				C6F3ACE92BFF813000A108D9 /* MovieType.swift in Sources */,
 				C6F3AC872BFF684000A108D9 /* AppDelegate.swift in Sources */,
 				C6F3ACEE2BFF83FC00A108D9 /* GetMovieListUseCase.swift in Sources */,
+				C694AE7E2C00587A00C65730 /* HomeHorizontalCell.swift in Sources */,
 				C6F3ACD72BFF763900A108D9 /* HomeView.swift in Sources */,
 				C6F3ACCA2BFF713000A108D9 /* APIError.swift in Sources */,
 				C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */,
