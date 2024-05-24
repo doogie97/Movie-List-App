@@ -9,7 +9,9 @@ import UIKit
 import SnapKit
 
 final class HomeView: UIView {
-    init() {
+    private weak var viewModel: HomeVMable?
+    init(viewModel: HomeVMable?) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         self.backgroundColor = .systemBackground
         self.addSubview(loadingView)

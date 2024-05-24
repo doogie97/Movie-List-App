@@ -8,7 +8,7 @@
 import RxRelay
 import Foundation
 
-protocol HomeVMable: HomeVMInput, HomeVMOutput {}
+protocol HomeVMable: HomeVMInput, HomeVMOutput, AnyObject {}
 
 protocol HomeVMInput {
     func getMovieList(keyword: String)

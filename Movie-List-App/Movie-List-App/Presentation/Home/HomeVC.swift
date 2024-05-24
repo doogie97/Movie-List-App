@@ -10,11 +10,12 @@ import RxSwift
 
 final class HomeVC: UIViewController {
     private let viewModel: HomeVMable
-    private let homeView = HomeView()
+    private let homeView: HomeView
     private let disposeBag = DisposeBag()
     
     init(viewModel: HomeVMable) {
         self.viewModel = viewModel
+        self.homeView = HomeView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
