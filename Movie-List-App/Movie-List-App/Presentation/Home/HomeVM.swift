@@ -46,6 +46,7 @@ final class HomeVM: HomeVMable {
                 try await requestList(searchType: .movie)
                 try await requestList(searchType: .series)
                 try await requestList(searchType: .episode)
+                try await requestList(searchType: .all)
                 await MainActor.run {
                     if movieSectionList.isEmpty {
                         showAlert.accept("검색 결과가 없습니다.")
@@ -65,7 +66,17 @@ final class HomeVM: HomeVMable {
     private func requestList(searchType: MovieType) async throws {
         let list = try await getMovieListUseCase.execute(keyword: keyword, searchType: searchType, page: 1)
         if list.totalCount != 0 {
-            movieSectionList.append(list)
+            if searchType == .all && list.movieList.count > 5 {
+                var movieList = list.movieList
+                movieList = Array(movieList.prefix(5))
+                movieSectionList.append(MovieList(
+                    movieType: .all,
+                    totalCount: list.totalCount,
+                    movieList: movieList
+                ))
+            } else {
+                movieSectionList.append(list)
+            }
         }
     }
     
