@@ -41,7 +41,7 @@ final class MovieListView: UIView {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalWidth(0.7)
+            heightDimension: .fractionalWidth(0.8)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
@@ -105,10 +105,11 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(MovieListCell.self)", for: indexPath) as? MovieListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(MovieListCell.self)", for: indexPath) as? MovieListCell,
+              let movie = viewModel?.movieList[safe: indexPath.row] else {
             return UICollectionViewCell()
         }
-        cell.setCellContents()
+        cell.setCellContents(movie: movie)
         return cell
     }
 }
