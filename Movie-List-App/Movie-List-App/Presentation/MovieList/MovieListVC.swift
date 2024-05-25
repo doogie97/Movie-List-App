@@ -11,11 +11,12 @@ import RxCocoa
 
 final class MovieListVC: UIViewController {
     private let viewModel: MovieListVMable
-    private let movieListView = MovieListView()
+    private let movieListView: MovieListView
     private let disposeBag = DisposeBag()
     
     init(viewModel: MovieListVMable) {
         self.viewModel = viewModel
+        self.movieListView = MovieListView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -47,7 +48,6 @@ final class MovieListVC: UIViewController {
         viewModel.setViewContents.withUnretained(self)
             .subscribe { owner, info in
                 owner.movieListView.setViewContents(
-                    viewModel: owner.viewModel,
                     keyword: info.keyword,
                     searchType: info.searchType
                 )

@@ -10,8 +10,13 @@ import SnapKit
 import RxSwift
 
 final class MovieListView: UIView {
-    init() {
+    private weak var viewModel: MovieListVMable?
+    private let disposeBag = DisposeBag()
+    
+    init(viewModel: MovieListVMable?) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
+        bindViewModel()
         setLayout()
     }
     
@@ -25,7 +30,7 @@ final class MovieListView: UIView {
     
     private lazy var listCollectionView: UICollectionView = {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1 / 3),
+            widthDimension: .fractionalWidth(1 / 2),
             heightDimension: .fractionalHeight(1)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -36,7 +41,7 @@ final class MovieListView: UIView {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalWidth(1 / 2)
+            heightDimension: .fractionalWidth(0.7)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
@@ -50,8 +55,7 @@ final class MovieListView: UIView {
         return collectionView
     }()
     
-    func setViewContents(viewModel: MovieListVMable,
-                         keyword: String,
+    func setViewContents(keyword: String,
                          searchType: MovieType) {
         self.navigationBar.titleLabel.text = "\(searchType.title) 목록"
         self.keywordLabel.text = "'\(keyword)' 검색 결과"
@@ -80,9 +84,24 @@ final class MovieListView: UIView {
     }
 }
 
+//MARK: - Bind Method
+extension MovieListView {
+    private func bindViewModel() {
+        viewModel?.pagingFinished.withUnretained(self)
+            .subscribe(onNext: { owner, preCount in
+                print(preCount)
+                if preCount == 0 {
+                    owner.listCollectionView.reloadData()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+//MARK: - Collection View
 extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return viewModel?.movieList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,6 +111,5 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.setCellContents()
         return cell
     }
-    
-    
 }
+

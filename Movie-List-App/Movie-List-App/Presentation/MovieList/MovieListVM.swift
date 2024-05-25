@@ -53,10 +53,11 @@ final class MovieListVM: MovieListVMable {
                     searchType: searchType,
                     page: page
                 )
+                let preCount = movieList.count
                 self.totalCount = list.totalCount
                 await MainActor.run {
-                    pagingFinished.accept(list.totalCount)
-                    print(list.totalCount)
+                    self.movieList += list.movieList
+                    pagingFinished.accept(preCount)
                 }
             } catch let error {
                 await MainActor.run {
