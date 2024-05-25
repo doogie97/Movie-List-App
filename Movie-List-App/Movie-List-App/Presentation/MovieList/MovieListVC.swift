@@ -11,11 +11,14 @@ import RxCocoa
 
 final class MovieListVC: UIViewController {
     private let viewModel: MovieListVMable
+    private let container: Containerable
     private let movieListView: MovieListView
     private let disposeBag = DisposeBag()
     
-    init(viewModel: MovieListVMable) {
+    init(viewModel: MovieListVMable,
+         container: Containerable) {
         self.viewModel = viewModel
+        self.container = container
         self.movieListView = MovieListView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,6 +54,19 @@ final class MovieListVC: UIViewController {
                     keyword: info.keyword,
                     searchType: info.searchType
                 )
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.showAlert.withUnretained(self)
+            .subscribe { owner, message in
+                owner.showAlert(message: message)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.showMovieDetail.withUnretained(self)
+            .subscribe { owner, id in
+                let movieDetailVC = owner.container.movieDetail(movieId: id)
+                owner.navigationController?.pushViewController(movieDetailVC, animated: true)
             }
             .disposed(by: disposeBag)
     }

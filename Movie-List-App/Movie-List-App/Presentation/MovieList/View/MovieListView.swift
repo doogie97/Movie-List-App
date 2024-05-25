@@ -25,7 +25,7 @@ final class MovieListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private(set) lazy var navigationBar = DefaultNavigationBar(title: "")
+    private(set) lazy var navigationBar = NavigationBar(title: "")
     
     private lazy var keywordLabel = pretendardLabel(family: .SemiBold)
     
@@ -189,6 +189,10 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
             
             return loadingCell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel?.touchMovieItem(index: indexPath.row)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -21,6 +21,7 @@ protocol HomeVMOutput {
     var showAlert: PublishRelay<String> { get }
     var searchFinished: PublishRelay<Bool> { get }
     var showMovieList: PublishRelay<(keyword: String, searchType: MovieType)> { get }
+    var showMovieDetail: PublishRelay<String> { get }
     var keyword: String { get }
     var movieSectionList: [MovieList] { get }
 }
@@ -83,7 +84,7 @@ final class HomeVM: HomeVMable {
             return
         }
         
-        print(movie.title)
+        showMovieDetail.accept(movie.id)
     }
     
     //MARK: - Output
@@ -96,6 +97,7 @@ final class HomeVM: HomeVMable {
     let showAlert = PublishRelay<String>()
     let searchFinished = PublishRelay<Bool>()
     let showMovieList = PublishRelay<(keyword: String, searchType: MovieType)>()
+    let showMovieDetail = PublishRelay<String>()
     var keyword = ""
     var movieSectionList = [MovieList]()
 }
