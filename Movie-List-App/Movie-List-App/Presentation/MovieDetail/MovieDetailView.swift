@@ -41,10 +41,15 @@ final class MovieDetailView: UIView {
         return gradient
     }()
     
+    private lazy var scrollView = UIScrollView()
+    private lazy var contentsView = UIView()
+    
     private func setLayout() {
-        self.backgroundColor = .systemBrown
+        self.backgroundColor = .systemBackground
         self.addSubview(gradientView)
         self.addSubview(navigationBar)
+        gradientView.addSubview(scrollView)
+        scrollView.addSubview(contentsView)
         
         gradientView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -53,6 +58,15 @@ final class MovieDetailView: UIView {
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).inset(8)
             $0.leading.trailing.equalTo(safeAreaLayoutGuide)
+        }
+        
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        contentsView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
         }
     }
 }
