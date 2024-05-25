@@ -11,6 +11,7 @@ protocol MovieListVMable: MovieListVMInput, MovieListVMOutput, AnyObject {}
 
 protocol MovieListVMInput {
     func viewDidLoad()
+    func getMovieList()
 }
 
 protocol MovieListVMOutput {
@@ -18,10 +19,12 @@ protocol MovieListVMOutput {
 }
 
 final class MovieListVM: MovieListVMable {
-    private let keyword: String
-    private let searchType: MovieType
+    private let getMovieListUseCase: GetMovieListUseCase
     
-    init(keyword: String, searchType: MovieType) {
+    init(getMovieListUseCase: GetMovieListUseCase,
+         keyword: String,
+         searchType: MovieType) {
+        self.getMovieListUseCase = getMovieListUseCase
         self.keyword = keyword
         self.searchType = searchType
         
@@ -29,9 +32,33 @@ final class MovieListVM: MovieListVMable {
         print(searchType)
     }
     
-    //MARK: - Intpu
+    private let keyword: String
+    private let searchType: MovieType
+    private var page = 1
+    
+    //MARK: - Intput
     func viewDidLoad() {
         setViewContents.accept((keyword: keyword, searchType: searchType))
+        getMovieList()
+    }
+    
+    func getMovieList() {
+        Task {
+            do {
+                let list = try await getMovieListUseCase.execute(
+                    keyword: keyword,
+                    searchType: searchType,
+                    page: page
+                )
+                await MainActor.run {
+                    print(list.totalCount)
+                }
+            } catch let error {
+                await MainActor.run {
+                    print(error)
+                }
+            }
+        }
     }
     
     //MARK: - Output
