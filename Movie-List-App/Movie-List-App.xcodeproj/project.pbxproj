@@ -139,9 +139,8 @@
 		C67427212C01A09A0047FEEC /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
-				C67427222C01A0AB0047FEEC /* MovieDetailView.swift */,
-				C67427312C01C6B90047FEEC /* MovieDetailTopInfoView.swift */,
 				C67427242C01A0B30047FEEC /* MovieDetailVC.swift */,
+				C67427342C01C7710047FEEC /* View */,
 				C67427262C01A0B80047FEEC /* MovieDetailVM.swift */,
 			);
 			path = MovieDetail;
@@ -154,6 +153,24 @@
 				C674272B2C01A59C0047FEEC /* MovieDetailDTO.swift */,
 			);
 			path = MovieDetailGET;
+			sourceTree = "<group>";
+		};
+		C67427332C01C76A0047FEEC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C694AE922C00EC4F00C65730 /* MovieListView.swift */,
+				C674271D2C017A5D0047FEEC /* MovieListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C67427342C01C7710047FEEC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C67427222C01A0AB0047FEEC /* MovieDetailView.swift */,
+				C67427312C01C6B90047FEEC /* MovieDetailTopInfoView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C694AE682C00134A00C65730 /* Extension */ = {
@@ -180,7 +197,7 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		C694AE772C004D4D00C65730 /* HomeView */ = {
+		C694AE772C004D4D00C65730 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				C6F3ACD62BFF763900A108D9 /* HomeView.swift */,
@@ -190,7 +207,7 @@
 				C694AE892C00899100C65730 /* HomeCenterPagingHeader.swift */,
 				C694AE7C2C00587000C65730 /* Cells */,
 			);
-			path = HomeView;
+			path = View;
 			sourceTree = "<group>";
 		};
 		C694AE7C2C00587000C65730 /* Cells */ = {
@@ -207,8 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				C694AE902C00EC1B00C65730 /* MovieListVC.swift */,
-				C694AE922C00EC4F00C65730 /* MovieListView.swift */,
-				C674271D2C017A5D0047FEEC /* MovieListCell.swift */,
+				C67427332C01C76A0047FEEC /* View */,
 				C694AE942C00EC8E00C65730 /* MovieListVM.swift */,
 			);
 			path = MovieList;
@@ -308,7 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F3AC8A2BFF684000A108D9 /* HomeVC.swift */,
-				C694AE772C004D4D00C65730 /* HomeView */,
+				C694AE772C004D4D00C65730 /* View */,
 				C6F3ACDC2BFF776C00A108D9 /* HomeVM.swift */,
 			);
 			path = Home;
