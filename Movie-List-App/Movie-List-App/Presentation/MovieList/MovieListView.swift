@@ -29,6 +29,14 @@ final class MovieListView: UIView {
     
     private lazy var keywordLabel = pretendardLabel(family: .SemiBold)
     
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray3
+        view.isHidden = true
+        
+        return view
+    }()
+    
     private lazy var listCollectionView = createSectionCollectionView()
     
     private lazy var loadingView = LoadingView()
@@ -44,6 +52,7 @@ final class MovieListView: UIView {
         self.backgroundColor = .systemBackground
         self.addSubview(navigationBar)
         self.addSubview(keywordLabel)
+        self.addSubview(separatorView)
         self.addSubview(listCollectionView)
         self.addSubview(loadingView)
         
@@ -51,14 +60,20 @@ final class MovieListView: UIView {
             $0.top.equalTo(safeAreaLayoutGuide).inset(8)
             $0.leading.trailing.equalTo(safeAreaLayoutGuide)
         }
-        
+
         keywordLabel.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom).inset(-4)
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(16)
+        }
+        
+        separatorView.snp.makeConstraints {
+            $0.top.equalTo(keywordLabel.snp.bottom).inset(-8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
         listCollectionView.snp.makeConstraints {
-            $0.top.equalTo(keywordLabel.snp.bottom).inset(-8)
+            $0.top.equalTo(separatorView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -177,6 +192,14 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 10 {
+            separatorView.isHidden = true
+        }
+        
+        if scrollView.contentOffset.y > 10 {
+            separatorView.isHidden = false
+        }
+        
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.height
