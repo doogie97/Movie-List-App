@@ -24,7 +24,7 @@ struct GetMovieDetailUseCase {
                 writer: response.Writer ?? "",
                 actors: response.Actors ?? "",
                 plot: response.Plot ?? "",
-                imageUrl: response.imdbRating ?? "",
+                imageUrl: response.Poster ?? "",
                 rating: response.imdbRating ?? ""
             )
         } catch let error {
