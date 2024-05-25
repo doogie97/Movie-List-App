@@ -34,7 +34,9 @@ final class Container: Containerable {
             searchType: searchType
         )
         
-        return MovieListVC(viewModel: viewModel)
+        return MovieListVC(viewModel: viewModel,
+                           container: self)
+    }
     
     func movieDetail(movieId: String) -> MovieDetailVC {
         let viewModel = MovieDetailVM(movieId: movieId)

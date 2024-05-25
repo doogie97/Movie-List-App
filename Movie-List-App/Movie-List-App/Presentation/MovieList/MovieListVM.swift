@@ -12,6 +12,7 @@ protocol MovieListVMable: MovieListVMInput, MovieListVMOutput, AnyObject {}
 protocol MovieListVMInput {
     func viewDidLoad()
     func getMovieList()
+    func touchMovieItem(index: Int)
 }
 
 protocol MovieListVMOutput {
@@ -20,6 +21,7 @@ protocol MovieListVMOutput {
     var pagingFinished: PublishRelay<Void> { get }
     var movieList: [MovieList.Movie] { get }
     var hasNext: Bool { get }
+    var showMovieDetail: PublishRelay<String> { get }
 }
 
 final class MovieListVM: MovieListVMable {
@@ -52,7 +54,6 @@ final class MovieListVM: MovieListVMable {
                     searchType: searchType,
                     page: page
                 )
-                let preCount = movieList.count
                 self.totalCount = list.totalCount
                 await MainActor.run {
                     self.movieList += list.movieList
@@ -70,10 +71,20 @@ final class MovieListVM: MovieListVMable {
         }
     }
     
+    func touchMovieItem(index: Int) {
+        guard let movie = movieList[safe: index] else {
+            showAlert.accept("해당 영화 정보를 불러올 수 없습니다.")
+            return
+        }
+        
+        showMovieDetail.accept(movie.id)
+    }
+    
     //MARK: - Output
     let setViewContents = PublishRelay<(keyword: String, searchType: MovieType)>()
     let showAlert = PublishRelay<String>()
     let pagingFinished = PublishRelay<Void>()
     var movieList = [MovieList.Movie]()
     var hasNext = true
+    let showMovieDetail = PublishRelay<String>()
 }

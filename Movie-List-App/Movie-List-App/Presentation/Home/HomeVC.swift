@@ -51,6 +51,13 @@ final class HomeVC: UIViewController {
                 owner.navigationController?.pushViewController(movieListVC, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.showMovieDetail.withUnretained(self)
+            .subscribe { owner, id in
+                let movieDetailVC = owner.container.movieDetail(movieId: id)
+                owner.navigationController?.pushViewController(movieDetailVC, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 

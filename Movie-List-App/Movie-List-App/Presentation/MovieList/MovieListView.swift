@@ -191,6 +191,10 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel?.touchMovieItem(index: indexPath.row)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y <= 10 {
             separatorView.isHidden = true
