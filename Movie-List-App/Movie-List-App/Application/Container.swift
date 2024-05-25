@@ -9,6 +9,8 @@ import Foundation
 
 protocol Containerable {
     func homeVC() -> HomeVC
+    func movieListVC(keyword: String,
+                     searchType: MovieType) -> MovieListVC
 }
 
 final class Container: Containerable {
@@ -19,6 +21,18 @@ final class Container: Containerable {
             getMovieListUseCase: GetMovieListUseCase(networkRepository: networkRepository)
         )
         
-        return HomeVC(viewModel: viewModel)
+        return HomeVC(viewModel: viewModel, 
+                      container: self)
+    }
+    
+    func movieListVC(keyword: String,
+                     searchType: MovieType) -> MovieListVC {
+        let viewModel = MovieListVM(
+            getMovieListUseCase: GetMovieListUseCase(networkRepository: networkRepository),
+            keyword: keyword,
+            searchType: searchType
+        )
+        
+        return MovieListVC(viewModel: viewModel)
     }
 }

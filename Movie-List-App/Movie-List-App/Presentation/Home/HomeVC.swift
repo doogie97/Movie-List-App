@@ -10,11 +10,14 @@ import RxSwift
 
 final class HomeVC: UIViewController {
     private let viewModel: HomeVMable
+    private let container: Containerable
     private let homeView: HomeView
     private let disposeBag = DisposeBag()
     
-    init(viewModel: HomeVMable) {
+    init(viewModel: HomeVMable,
+         container: Containerable) {
         self.viewModel = viewModel
+        self.container = container
         self.homeView = HomeView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,6 +41,14 @@ final class HomeVC: UIViewController {
         viewModel.showAlert.withUnretained(self)
             .subscribe { owner, message in
                 owner.showAlert(message: message)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.showMovieList.withUnretained(self)
+            .subscribe { owner, info in
+                let movieListVC = owner.container.movieListVC(keyword: info.keyword,
+                                                              searchType: info.searchType)
+                owner.navigationController?.pushViewController(movieListVC, animated: true)
             }
             .disposed(by: disposeBag)
     }

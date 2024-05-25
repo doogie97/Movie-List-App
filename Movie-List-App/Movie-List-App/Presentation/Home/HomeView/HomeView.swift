@@ -140,7 +140,7 @@ final class HomeView: UIView {
         self.addSubview(loadingView)
 
         searchField.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.top.equalTo(safeAreaLayoutGuide).inset(8)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(38)
         }

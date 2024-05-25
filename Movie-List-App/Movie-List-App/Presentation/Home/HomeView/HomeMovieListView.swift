@@ -62,6 +62,7 @@ extension HomeMovieListView: UICollectionViewDataSource, UICollectionViewDelegat
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
         
         collectionView.register(HomeHorizontalCell.self,
                                 forCellWithReuseIdentifier: "\(HomeHorizontalCell.self)")
