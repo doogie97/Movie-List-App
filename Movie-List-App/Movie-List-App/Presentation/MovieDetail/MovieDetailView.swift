@@ -46,7 +46,14 @@ final class MovieDetailView: UIView {
     
     private lazy var posterImageView = UIImageView()
    
-    private lazy var titleLabel = pretendardLabel(family: .Bold, size: 20)
+    private lazy var titleLabel = pretendardLabel(family: .Bold, size: 20, lineCount: 2)
+    
+    func setViewContents(movieDetail: MovieDetail) {
+        posterImageView.setImage(movieDetail.imageUrl)
+        titleLabel.text = movieDetail.title
+        gradientView.layer.addSublayer(gradientLayer)
+    }
+    
     private func setLayout() {
         self.backgroundColor = .systemBackground
         self.addSubview(gradientView)

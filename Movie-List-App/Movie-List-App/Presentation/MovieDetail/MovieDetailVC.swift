@@ -30,6 +30,7 @@ final class MovieDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindView()
+        bindViewModel()
         viewModel.viewDidLoad()
     }
     
@@ -38,6 +39,14 @@ final class MovieDetailVC: UIViewController {
             .withUnretained(self)
             .subscribe { owner, _ in
                 owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewModel() {
+        viewModel.setViewContents.withUnretained(self)
+            .subscribe { owner, movieDetail in
+                owner.movieDetailView.setViewContents(movieDetail: movieDetail)
             }
             .disposed(by: disposeBag)
     }
