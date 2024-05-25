@@ -9,6 +9,8 @@ protocol NetworkRepositoryable {
     func getMovieList(keyword: String,
                       searchType: MovieType,
                       page: Int) async throws -> MovieListDTO
+    
+    func getMovieDetail(movieId: String) async throws -> MovieDetailDTO
 }
 
 struct NetworkRepository: NetworkRepositoryable {
@@ -29,6 +31,16 @@ struct NetworkRepository: NetworkRepositoryable {
         
         do {
             return try await networkManager.request(requestable, resultType: MovieListDTO.self)
+        } catch let error {
+            throw error
+        }
+    }
+    
+    func getMovieDetail(movieId: String) async throws -> MovieDetailDTO {
+        let requestable = MovieDetailGET(movieId: movieId)
+        
+        do {
+            return try await networkManager.request(requestable, resultType: MovieDetailDTO.self)
         } catch let error {
             throw error
         }
