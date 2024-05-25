@@ -28,32 +28,7 @@ final class MovieListView: UIView {
     
     private lazy var keywordLabel = pretendardLabel(family: .SemiBold)
     
-    private lazy var listCollectionView: UICollectionView = {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1 / 2),
-            heightDimension: .fractionalHeight(1)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 4,
-                                   leading: 4,
-                                   bottom: 4,
-                                   trailing: 4)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalWidth(0.8)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                       subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(MovieListCell.self, forCellWithReuseIdentifier: "\(MovieListCell.self)")
-        return collectionView
-    }()
+    private lazy var listCollectionView = createSectionCollectionView()
     
     func setViewContents(keyword: String,
                          searchType: MovieType) {
@@ -100,17 +75,92 @@ extension MovieListView {
 
 //MARK: - Collection View
 extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
+    private func createSectionCollectionView() -> UICollectionView {
+        let layout = createLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.register(MovieListCell.self,
+                                forCellWithReuseIdentifier: "\(MovieListCell.self)")
+        collectionView.register(LoadingCVCell.self,
+                                forCellWithReuseIdentifier: "\(LoadingCVCell.self)")
+        
+        return collectionView
+    }
+    
+    private func createLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { [weak self] (sectionIndex, _)  -> NSCollectionLayoutSection? in
+            if sectionIndex == 0 {
+                return self?.movieListSectionLayout()
+            } else {
+                return self?.loadingSectionLayout()
+            }
+        }
+    }
+    
+    private func movieListSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1 / 2),
+            heightDimension: .fractionalHeight(1)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 4,
+                                   leading: 4,
+                                   bottom: 4,
+                                   trailing: 4)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalWidth(0.8)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        
+        return section
+    }
+    
+    private func loadingSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(50)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        
+        return section
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.movieList.count ?? 0
+        if section == 0 {
+            return viewModel?.movieList.count ?? 0
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(MovieListCell.self)", for: indexPath) as? MovieListCell,
-              let movie = viewModel?.movieList[safe: indexPath.row] else {
-            return UICollectionViewCell()
+        if indexPath.section == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(MovieListCell.self)", for: indexPath) as? MovieListCell,
+                  let movie = viewModel?.movieList[safe: indexPath.row] else {
+                return UICollectionViewCell()
+            }
+            cell.setCellContents(movie: movie)
+            return cell
+        } else {
+            guard let loadingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(LoadingCVCell.self)", for: indexPath) as? LoadingCVCell else {
+                return UICollectionViewCell()
+            }
+            
+            return loadingCell
         }
-        cell.setCellContents(movie: movie)
-        return cell
     }
 }
 
