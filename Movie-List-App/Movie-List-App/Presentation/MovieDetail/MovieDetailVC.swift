@@ -26,6 +26,11 @@ final class MovieDetailVC: UIViewController {
         super.loadView()
         self.view = movieDetailView
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.viewDidLoad()
+    }
 }
 
 
