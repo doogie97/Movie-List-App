@@ -43,7 +43,12 @@ final class MovieDetailView: UIView {
         return gradient
     }()
     
-    private lazy var scrollView = UIScrollView()
+    private lazy var scrollView = {
+        let scrollView = UIScrollView()
+        scrollView.layer.opacity = 0
+        
+        return scrollView
+    }()
     private lazy var contentsView = UIView()
     
     private lazy var topInfoView = MovieDetailTopInfoView()
@@ -54,6 +59,11 @@ final class MovieDetailView: UIView {
         bottomInfoView.setViewContents(movieDetail: movieDetail)
         gradientView.layer.addSublayer(gradientLayer)
         loadingView.isHidden = true
+        
+        layoutIfNeeded()
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.scrollView.layer.opacity = 1
+        }
     }
     
     private func setLayout() {
