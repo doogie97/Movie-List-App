@@ -18,6 +18,8 @@ final class MovieDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private lazy var loadingView = LoadingView()
+    
     private(set) lazy var navigationBar = {
         let navigationBar = NavigationBar(title: "")
         navigationBar.backButton.tintColor = .white
@@ -51,6 +53,7 @@ final class MovieDetailView: UIView {
         topInfoView.setViewContents(movieDetail: movieDetail)
         bottomInfoView.setViewContents(movieDetail: movieDetail)
         gradientView.layer.addSublayer(gradientLayer)
+        loadingView.isHidden = true
     }
     
     private func setLayout() {
@@ -61,6 +64,7 @@ final class MovieDetailView: UIView {
         scrollView.addSubview(contentsView)
         contentsView.addSubview(topInfoView)
         contentsView.addSubview(bottomInfoView)
+        self.addSubview(loadingView)
         
         gradientView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -87,6 +91,11 @@ final class MovieDetailView: UIView {
         bottomInfoView.snp.makeConstraints {
             $0.top.equalTo(topInfoView.snp.bottom)
             $0.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            loadingView.isLoading(true)
         }
     }
 }
