@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C674271E2C017A5D0047FEEC /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674271D2C017A5D0047FEEC /* MovieListCell.swift */; };
+		C67427202C018EDA0047FEEC /* LoadingCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674271F2C018EDA0047FEEC /* LoadingCVCell.swift */; };
 		C694AE6A2C00136300C65730 /* ViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE692C00136300C65730 /* ViewController+extension.swift */; };
 		C694AE722C002B6A00C65730 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */; };
 		C694AE732C002B6A00C65730 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE702C002B6A00C65730 /* Pretendard-Bold.otf */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		C674271D2C017A5D0047FEEC /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
+		C674271F2C018EDA0047FEEC /* LoadingCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCVCell.swift; sourceTree = "<group>"; };
 		C694AE692C00136300C65730 /* ViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+extension.swift"; sourceTree = "<group>"; };
 		C694AE6D2C0023EB00C65730 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F3ACDA2BFF76D000A108D9 /* LoadingView.swift */,
+				C674271F2C018EDA0047FEEC /* LoadingCVCell.swift */,
 				C694AE982C00EF6F00C65730 /* NavigationBar.swift */,
 			);
 			path = Helper;
@@ -452,6 +455,7 @@
 				C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */,
 				C6F3ACDF2BFF77DA00A108D9 /* Container.swift in Sources */,
 				C674271E2C017A5D0047FEEC /* MovieListCell.swift in Sources */,
+				C67427202C018EDA0047FEEC /* LoadingCVCell.swift in Sources */,
 				C694AE972C00EECF00C65730 /* UINavigationController+extension.swift in Sources */,
 				C694AE8E2C00E8F800C65730 /* SearchEmptyView.swift in Sources */,
 				C694AE822C00675600C65730 /* HomeSectionHeader.swift in Sources */,
