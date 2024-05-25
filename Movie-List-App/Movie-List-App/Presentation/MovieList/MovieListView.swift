@@ -88,6 +88,7 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
         
         collectionView.register(MovieListCell.self,
                                 forCellWithReuseIdentifier: "\(MovieListCell.self)")
