@@ -15,6 +15,7 @@ protocol MovieDetailVMInput {
 
 protocol MovieDetailVMOutput {
     var setViewContents: PublishRelay<MovieDetail> { get }
+    var showAlert: PublishRelay<String> { get }
 }
 
 final class MovieDetailVM: MovieDetailVMable {
@@ -37,7 +38,7 @@ final class MovieDetailVM: MovieDetailVMable {
                 }
             } catch let error {
                 await MainActor.run {
-                    print(error)
+                    showAlert.accept(error.errorMessage)
                 }
             }
         }
@@ -45,4 +46,5 @@ final class MovieDetailVM: MovieDetailVMable {
     
     //MARK: - Output
     let setViewContents = PublishRelay<MovieDetail>()
+    let showAlert = PublishRelay<String>()
 }

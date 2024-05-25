@@ -49,6 +49,14 @@ final class MovieDetailVC: UIViewController {
                 owner.movieDetailView.setViewContents(movieDetail: movieDetail)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.showAlert.withUnretained(self)
+            .subscribe { owner, message in
+                owner.showAlert(message: message) {
+                    owner.navigationController?.popViewController(animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
 
