@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class DefaultNavigationBar: UIView {
+final class NavigationBar: UIView {
     init(title: String) {
         super.init(frame: .zero)
         self.titleLabel.text = title

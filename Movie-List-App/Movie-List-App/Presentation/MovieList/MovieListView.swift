@@ -25,7 +25,7 @@ final class MovieListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private(set) lazy var navigationBar = DefaultNavigationBar(title: "")
+    private(set) lazy var navigationBar = NavigationBar(title: "")
     
     private lazy var keywordLabel = pretendardLabel(family: .SemiBold)
     
