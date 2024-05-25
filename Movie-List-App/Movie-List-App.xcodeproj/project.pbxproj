@@ -17,6 +17,7 @@
 		C674272E2C01A9200047FEEC /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674272D2C01A9200047FEEC /* MovieDetail.swift */; };
 		C67427302C01A9980047FEEC /* GetMovieDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674272F2C01A9980047FEEC /* GetMovieDetailUseCase.swift */; };
 		C67427322C01C6B90047FEEC /* MovieDetailTopInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67427312C01C6B90047FEEC /* MovieDetailTopInfoView.swift */; };
+		C67427362C01CAE10047FEEC /* MovieDetailBottomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67427352C01CAE10047FEEC /* MovieDetailBottomInfoView.swift */; };
 		C694AE6A2C00136300C65730 /* ViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE692C00136300C65730 /* ViewController+extension.swift */; };
 		C694AE722C002B6A00C65730 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */; };
 		C694AE732C002B6A00C65730 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE702C002B6A00C65730 /* Pretendard-Bold.otf */; };
@@ -75,6 +76,7 @@
 		C674272D2C01A9200047FEEC /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		C674272F2C01A9980047FEEC /* GetMovieDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailUseCase.swift; sourceTree = "<group>"; };
 		C67427312C01C6B90047FEEC /* MovieDetailTopInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTopInfoView.swift; sourceTree = "<group>"; };
+		C67427352C01CAE10047FEEC /* MovieDetailBottomInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailBottomInfoView.swift; sourceTree = "<group>"; };
 		C694AE692C00136300C65730 /* ViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+extension.swift"; sourceTree = "<group>"; };
 		C694AE6D2C0023EB00C65730 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			children = (
 				C67427222C01A0AB0047FEEC /* MovieDetailView.swift */,
 				C67427312C01C6B90047FEEC /* MovieDetailTopInfoView.swift */,
+				C67427352C01CAE10047FEEC /* MovieDetailBottomInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				C694AE822C00675600C65730 /* HomeSectionHeader.swift in Sources */,
 				C67427252C01A0B30047FEEC /* MovieDetailVC.swift in Sources */,
 				C67427322C01C6B90047FEEC /* MovieDetailTopInfoView.swift in Sources */,
+				C67427362C01CAE10047FEEC /* MovieDetailBottomInfoView.swift in Sources */,
 				C6F3ACE52BFF7DCA00A108D9 /* MovieListDTO.swift in Sources */,
 				C6F3ACDB2BFF76D000A108D9 /* LoadingView.swift in Sources */,
 			);

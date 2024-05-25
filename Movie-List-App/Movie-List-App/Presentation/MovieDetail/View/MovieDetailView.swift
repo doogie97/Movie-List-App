@@ -45,10 +45,11 @@ final class MovieDetailView: UIView {
     private lazy var contentsView = UIView()
     
     private lazy var topInfoView = MovieDetailTopInfoView()
-    
+    private lazy var bottomInfoView = MovieDetailBottomInfoView()
     
     func setViewContents(movieDetail: MovieDetail) {
         topInfoView.setViewContents(movieDetail: movieDetail)
+        bottomInfoView.setViewContents(movieDetail: movieDetail)
         gradientView.layer.addSublayer(gradientLayer)
     }
     
@@ -59,6 +60,7 @@ final class MovieDetailView: UIView {
         gradientView.addSubview(scrollView)
         scrollView.addSubview(contentsView)
         contentsView.addSubview(topInfoView)
+        contentsView.addSubview(bottomInfoView)
         
         gradientView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -80,8 +82,11 @@ final class MovieDetailView: UIView {
         
         topInfoView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            
-            $0.bottom.equalToSuperview()//다음 뷰로 이동
+        }
+        
+        bottomInfoView.snp.makeConstraints {
+            $0.top.equalTo(topInfoView.snp.bottom)
+            $0.bottom.leading.trailing.equalToSuperview()
         }
     }
 }
