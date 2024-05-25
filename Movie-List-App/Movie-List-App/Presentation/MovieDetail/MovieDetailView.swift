@@ -18,7 +18,12 @@ final class MovieDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private(set) lazy var navigationBar = NavigationBar(title: "")
+    private(set) lazy var navigationBar = {
+        let navigationBar = NavigationBar(title: "")
+        navigationBar.backButton.tintColor = .white
+        
+        return navigationBar
+    }()
     
     private func setLayout() {
         self.backgroundColor = .systemBrown
