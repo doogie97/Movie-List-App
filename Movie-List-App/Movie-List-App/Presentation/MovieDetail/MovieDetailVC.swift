@@ -29,7 +29,17 @@ final class MovieDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindView()
         viewModel.viewDidLoad()
+    }
+    
+    private func bindView() {
+        movieDetailView.navigationBar.backButton.rx.tap
+            .withUnretained(self)
+            .subscribe { owner, _ in
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
