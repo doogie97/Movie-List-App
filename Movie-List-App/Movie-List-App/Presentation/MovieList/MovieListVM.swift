@@ -18,6 +18,7 @@ protocol MovieListVMOutput {
     var setViewContents: PublishRelay<(keyword: String, searchType: MovieType)> { get }
     var pagingFinished: PublishRelay<Int> { get }
     var movieList: [MovieList.Movie] { get }
+    var hasNext: Bool { get }
 }
 
 final class MovieListVM: MovieListVMable {
@@ -29,9 +30,6 @@ final class MovieListVM: MovieListVMable {
         self.getMovieListUseCase = getMovieListUseCase
         self.keyword = keyword
         self.searchType = searchType
-        
-        print(keyword)
-        print(searchType)
     }
     
     private let keyword: String
@@ -57,7 +55,11 @@ final class MovieListVM: MovieListVMable {
                 self.totalCount = list.totalCount
                 await MainActor.run {
                     self.movieList += list.movieList
+                    if totalCount <= self.movieList.count {
+                        hasNext = false
+                    }
                     pagingFinished.accept(preCount)
+                    page += 1
                 }
             } catch let error {
                 await MainActor.run {
@@ -71,4 +73,5 @@ final class MovieListVM: MovieListVMable {
     let setViewContents = PublishRelay<(keyword: String, searchType: MovieType)>()
     let pagingFinished = PublishRelay<Int>()
     var movieList = [MovieList.Movie]()
+    var hasNext = true
 }

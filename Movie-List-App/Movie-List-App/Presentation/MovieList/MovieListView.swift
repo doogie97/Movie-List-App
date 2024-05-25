@@ -12,6 +12,7 @@ import RxSwift
 final class MovieListView: UIView {
     private weak var viewModel: MovieListVMable?
     private let disposeBag = DisposeBag()
+    private var isPaging = true
     
     init(viewModel: MovieListVMable?) {
         self.viewModel = viewModel
@@ -64,10 +65,8 @@ extension MovieListView {
     private func bindViewModel() {
         viewModel?.pagingFinished.withUnretained(self)
             .subscribe(onNext: { owner, preCount in
-                print(preCount)
-                if preCount == 0 {
-                    owner.listCollectionView.reloadData()
-                }
+                owner.isPaging = false
+                owner.listCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -141,9 +140,13 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return viewModel?.movieList.count ?? 0
-        } else {
+        }
+        
+        if (section == 1) && isPaging && (viewModel?.hasNext == true) {
             return 1
         }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,6 +163,22 @@ extension MovieListView: UICollectionViewDataSource, UICollectionViewDelegate {
             }
             
             return loadingCell
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        if offsetY > (contentHeight - height) {
+            if !isPaging && (viewModel?.hasNext == true) {
+                isPaging = true
+                listCollectionView.reloadSections(IndexSet(integer: 1))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    self?.viewModel?.getMovieList()
+                }
+            }
         }
     }
 }
