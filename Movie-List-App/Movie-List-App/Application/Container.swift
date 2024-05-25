@@ -39,7 +39,10 @@ final class Container: Containerable {
     }
     
     func movieDetail(movieId: String) -> MovieDetailVC {
-        let viewModel = MovieDetailVM(movieId: movieId)
+        let viewModel = MovieDetailVM(
+            getMovieDetailUseCase: GetMovieDetailUseCase(networkRepository: networkRepository),
+            movieId: movieId
+        )
         
         return MovieDetailVC(viewModel: viewModel)
     }

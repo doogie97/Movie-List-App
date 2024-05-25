@@ -14,6 +14,8 @@
 		C67427272C01A0B80047FEEC /* MovieDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67427262C01A0B80047FEEC /* MovieDetailVM.swift */; };
 		C674272A2C01A5960047FEEC /* MovieDetailGET.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67427292C01A5960047FEEC /* MovieDetailGET.swift */; };
 		C674272C2C01A59C0047FEEC /* MovieDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674272B2C01A59C0047FEEC /* MovieDetailDTO.swift */; };
+		C674272E2C01A9200047FEEC /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674272D2C01A9200047FEEC /* MovieDetail.swift */; };
+		C67427302C01A9980047FEEC /* GetMovieDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674272F2C01A9980047FEEC /* GetMovieDetailUseCase.swift */; };
 		C694AE6A2C00136300C65730 /* ViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694AE692C00136300C65730 /* ViewController+extension.swift */; };
 		C694AE722C002B6A00C65730 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */; };
 		C694AE732C002B6A00C65730 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C694AE702C002B6A00C65730 /* Pretendard-Bold.otf */; };
@@ -69,6 +71,8 @@
 		C67427262C01A0B80047FEEC /* MovieDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVM.swift; sourceTree = "<group>"; };
 		C67427292C01A5960047FEEC /* MovieDetailGET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailGET.swift; sourceTree = "<group>"; };
 		C674272B2C01A59C0047FEEC /* MovieDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailDTO.swift; sourceTree = "<group>"; };
+		C674272D2C01A9200047FEEC /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		C674272F2C01A9980047FEEC /* GetMovieDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailUseCase.swift; sourceTree = "<group>"; };
 		C694AE692C00136300C65730 /* ViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+extension.swift"; sourceTree = "<group>"; };
 		C694AE6D2C0023EB00C65730 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C694AE6F2C002B6A00C65730 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F3ACEA2BFF818700A108D9 /* MovieList.swift */,
+				C674272D2C01A9200047FEEC /* MovieDetail.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F3ACED2BFF83FC00A108D9 /* GetMovieListUseCase.swift */,
+				C674272F2C01A9980047FEEC /* GetMovieDetailUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -478,6 +484,7 @@
 				C6F3ACC62BFF6FB600A108D9 /* Requestable.swift in Sources */,
 				C6F3ACE92BFF813000A108D9 /* MovieType.swift in Sources */,
 				C694AE932C00EC4F00C65730 /* MovieListView.swift in Sources */,
+				C674272E2C01A9200047FEEC /* MovieDetail.swift in Sources */,
 				C6F3AC872BFF684000A108D9 /* AppDelegate.swift in Sources */,
 				C6F3ACEE2BFF83FC00A108D9 /* GetMovieListUseCase.swift in Sources */,
 				C694AE7E2C00587A00C65730 /* HomeHorizontalCell.swift in Sources */,
@@ -488,6 +495,7 @@
 				C694AE842C0067DD00C65730 /* UIView+Extension.swift in Sources */,
 				C6F3AC892BFF684000A108D9 /* SceneDelegate.swift in Sources */,
 				C6F3ACDF2BFF77DA00A108D9 /* Container.swift in Sources */,
+				C67427302C01A9980047FEEC /* GetMovieDetailUseCase.swift in Sources */,
 				C674271E2C017A5D0047FEEC /* MovieListCell.swift in Sources */,
 				C67427202C018EDA0047FEEC /* LoadingCVCell.swift in Sources */,
 				C67427232C01A0AB0047FEEC /* MovieDetailView.swift in Sources */,
