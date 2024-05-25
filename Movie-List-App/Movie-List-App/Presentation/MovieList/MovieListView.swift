@@ -12,7 +12,7 @@ import RxSwift
 final class MovieListView: UIView {
     private weak var viewModel: MovieListVMable?
     private let disposeBag = DisposeBag()
-    private var isPaging = true
+    private var isPaging = false
     
     init(viewModel: MovieListVMable?) {
         self.viewModel = viewModel
@@ -31,8 +31,11 @@ final class MovieListView: UIView {
     
     private lazy var listCollectionView = createSectionCollectionView()
     
+    private lazy var loadingView = LoadingView()
+    
     func setViewContents(keyword: String,
                          searchType: MovieType) {
+        self.loadingView.isLoading(true)
         self.navigationBar.titleLabel.text = "\(searchType.title) 목록"
         self.keywordLabel.text = "'\(keyword)' 검색 결과"
     }
@@ -42,6 +45,7 @@ final class MovieListView: UIView {
         self.addSubview(navigationBar)
         self.addSubview(keywordLabel)
         self.addSubview(listCollectionView)
+        self.addSubview(loadingView)
         
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).inset(8)
@@ -57,6 +61,10 @@ final class MovieListView: UIView {
             $0.top.equalTo(keywordLabel.snp.bottom).inset(-8)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
 
@@ -65,6 +73,7 @@ extension MovieListView {
     private func bindViewModel() {
         viewModel?.pagingFinished.withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.loadingView.isHidden = true
                 owner.isPaging = false
                 owner.listCollectionView.reloadData()
             })
