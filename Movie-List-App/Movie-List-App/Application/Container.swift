@@ -11,6 +11,7 @@ protocol Containerable {
     func homeVC() -> HomeVC
     func movieListVC(keyword: String,
                      searchType: MovieType) -> MovieListVC
+    func movieDetail(movieId: String) -> MovieDetailVC
 }
 
 final class Container: Containerable {
@@ -34,5 +35,10 @@ final class Container: Containerable {
         )
         
         return MovieListVC(viewModel: viewModel)
+    
+    func movieDetail(movieId: String) -> MovieDetailVC {
+        let viewModel = MovieDetailVM(movieId: movieId)
+        
+        return MovieDetailVC(viewModel: viewModel)
     }
 }
