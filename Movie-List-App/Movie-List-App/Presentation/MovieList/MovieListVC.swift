@@ -53,5 +53,11 @@ final class MovieListVC: UIViewController {
                 )
             }
             .disposed(by: disposeBag)
+        
+        viewModel.showAlert.withUnretained(self)
+            .subscribe { owner, message in
+                owner.showAlert(message: message)
+            }
+            .disposed(by: disposeBag)
     }
 }

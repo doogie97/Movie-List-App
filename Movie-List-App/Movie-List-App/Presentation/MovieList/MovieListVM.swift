@@ -16,6 +16,7 @@ protocol MovieListVMInput {
 
 protocol MovieListVMOutput {
     var setViewContents: PublishRelay<(keyword: String, searchType: MovieType)> { get }
+    var showAlert: PublishRelay<String> { get }
     var pagingFinished: PublishRelay<Void> { get }
     var movieList: [MovieList.Movie] { get }
     var hasNext: Bool { get }
@@ -63,7 +64,7 @@ final class MovieListVM: MovieListVMable {
                 }
             } catch let error {
                 await MainActor.run {
-                    print(error)
+                    showAlert.accept(error.errorMessage)
                 }
             }
         }
@@ -71,6 +72,7 @@ final class MovieListVM: MovieListVMable {
     
     //MARK: - Output
     let setViewContents = PublishRelay<(keyword: String, searchType: MovieType)>()
+    let showAlert = PublishRelay<String>()
     let pagingFinished = PublishRelay<Void>()
     var movieList = [MovieList.Movie]()
     var hasNext = true
