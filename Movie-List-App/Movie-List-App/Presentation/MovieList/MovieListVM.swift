@@ -16,6 +16,8 @@ protocol MovieListVMInput {
 
 protocol MovieListVMOutput {
     var setViewContents: PublishRelay<(keyword: String, searchType: MovieType)> { get }
+    var pagingFinished: PublishRelay<Int> { get }
+    var movieList: [MovieList.Movie] { get }
 }
 
 final class MovieListVM: MovieListVMable {
@@ -35,6 +37,7 @@ final class MovieListVM: MovieListVMable {
     private let keyword: String
     private let searchType: MovieType
     private var page = 1
+    private var totalCount = 0
     
     //MARK: - Intput
     func viewDidLoad() {
@@ -50,7 +53,9 @@ final class MovieListVM: MovieListVMable {
                     searchType: searchType,
                     page: page
                 )
+                self.totalCount = list.totalCount
                 await MainActor.run {
+                    pagingFinished.accept(list.totalCount)
                     print(list.totalCount)
                 }
             } catch let error {
@@ -63,4 +68,6 @@ final class MovieListVM: MovieListVMable {
     
     //MARK: - Output
     let setViewContents = PublishRelay<(keyword: String, searchType: MovieType)>()
+    let pagingFinished = PublishRelay<Int>()
+    var movieList = [MovieList.Movie]()
 }
