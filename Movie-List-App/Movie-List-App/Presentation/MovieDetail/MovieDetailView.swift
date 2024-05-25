@@ -44,13 +44,11 @@ final class MovieDetailView: UIView {
     private lazy var scrollView = UIScrollView()
     private lazy var contentsView = UIView()
     
-    private lazy var posterImageView = UIImageView()
-   
-    private lazy var titleLabel = pretendardLabel(family: .Bold, size: 20, lineCount: 2)
+    private lazy var topInfoView = MovieDetailTopInfoView()
+    
     
     func setViewContents(movieDetail: MovieDetail) {
-        posterImageView.setImage(movieDetail.imageUrl)
-        titleLabel.text = movieDetail.title
+        topInfoView.setViewContents(movieDetail: movieDetail)
         gradientView.layer.addSublayer(gradientLayer)
     }
     
@@ -60,8 +58,7 @@ final class MovieDetailView: UIView {
         self.addSubview(navigationBar)
         gradientView.addSubview(scrollView)
         scrollView.addSubview(contentsView)
-        contentsView.addSubview(posterImageView)
-        contentsView.addSubview(titleLabel)
+        contentsView.addSubview(topInfoView)
         
         gradientView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -81,15 +78,10 @@ final class MovieDetailView: UIView {
             $0.width.equalToSuperview()
         }
         
-        posterImageView.snp.makeConstraints {
+        topInfoView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(posterImageView.snp.width).multipliedBy(1.43)
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(posterImageView.snp.bottom).inset(-16)
-            $0.leading.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview() //다음 뷰로 이동
+            
+            $0.bottom.equalToSuperview()//다음 뷰로 이동
         }
     }
 }
