@@ -25,9 +25,31 @@ final class MovieDetailView: UIView {
         return navigationBar
     }()
     
+    private lazy var gradientView = UIView()
+    private lazy var gradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0,
+                                y: 0,
+                                width: scrollView.frame.width,
+                                height: scrollView.frame.height / 4)
+        let colors: [CGColor] = [
+            .init(red: 0, green: 0, blue: 0, alpha: 1),
+            .init(red: 0, green: 0, blue: 0, alpha: 0)
+        ]
+        gradient.colors = colors
+        
+        return gradient
+    }()
+    
     private func setLayout() {
         self.backgroundColor = .systemBrown
+        self.addSubview(gradientView)
         self.addSubview(navigationBar)
+        
+        gradientView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).inset(8)
             $0.leading.trailing.equalTo(safeAreaLayoutGuide)
