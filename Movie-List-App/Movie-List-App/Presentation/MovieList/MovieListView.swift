@@ -64,7 +64,7 @@ final class MovieListView: UIView {
 extension MovieListView {
     private func bindViewModel() {
         viewModel?.pagingFinished.withUnretained(self)
-            .subscribe(onNext: { owner, preCount in
+            .subscribe(onNext: { owner, _ in
                 owner.isPaging = false
                 owner.listCollectionView.reloadData()
             })
