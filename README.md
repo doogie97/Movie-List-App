@@ -1,3 +1,5 @@
+Api Key는 노출되면 안되나 편하게 프로젝트 확인을 하기 위해 Requestable에 하드코딩 해놓음
+
 ## 홈 화면
 https://github.com/doogie97/Movie-List-App/assets/82325822/6a5b53d0-b4f9-4acd-8c4a-a5966480fddd
 
