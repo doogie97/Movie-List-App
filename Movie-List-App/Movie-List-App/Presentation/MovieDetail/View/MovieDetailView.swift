@@ -46,6 +46,7 @@ final class MovieDetailView: UIView {
     private lazy var scrollView = {
         let scrollView = UIScrollView()
         scrollView.layer.opacity = 0
+        scrollView.showsVerticalScrollIndicator = false
         
         return scrollView
     }()
